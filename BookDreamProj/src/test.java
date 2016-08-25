@@ -10,6 +10,7 @@ public class test {
 		int f = 0;
 		System.err.println("TEST");
 		int g =0;
+		int h = 0;
 	}
 
 }

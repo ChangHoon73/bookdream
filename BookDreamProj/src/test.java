@@ -9,6 +9,7 @@ public class test {
 		int e = 0;
 		int f = 0;
 		System.err.println("TEST");
+		int g =0;
 	}
 
 }

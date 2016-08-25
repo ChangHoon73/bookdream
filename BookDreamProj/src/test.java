@@ -12,6 +12,7 @@ public class test {
 		int g =0;
 		int h = 0;
 		System.out.println("import test by jds");
+		System.out.println("import test by YEJIN");
 	}
 
 }

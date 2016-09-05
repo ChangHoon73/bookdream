@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Zip">
+
+    <resultMap id="result" type="Zip">
+        <result property="seq" column="seq"/>
+        <result property="sido" column="sido"/>   
+        <result property="gugun" column="gugun"/>
+        <result property="dong" column="dong"/>
+        <result property="bunji" column="bunji"/>
+        
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM zip;
+    </select>
+    
+ 	<select id="selectBySeq" parameterType="int" resultMap="result">
+        SELECT * FROM zip WHERE seq = #{seq}
+    </select>
+    
+
+</mapper>

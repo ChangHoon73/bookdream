@@ -14,6 +14,8 @@ public class HomeMain extends JPanel{
 	private JComboBox cb_gugun;
 	private JComboBox cb_dong;
 	private JTable table;
+	
+	
 	public HomeMain(){
 		initilize();
 		this.setLayout(null); // 현재 레이아웃을 Absolute Layout으로 변경

@@ -1,11 +1,17 @@
 package kr.or.bookdream;
 
+import java.util.Vector;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import kr.or.bookdream.dao.Cat1DAO;
+import kr.or.bookdream.vo.Category1;
+import kr.or.bookdream.vo.Category2;
 
 public class HomeMain extends JPanel{
 	private JComboBox cb_cat1;
@@ -14,7 +20,10 @@ public class HomeMain extends JPanel{
 	private JComboBox cb_gugun;
 	private JComboBox cb_dong;
 	private JTable table;
-	
+	private Vector<Category1> vcat1;
+	private Vector<Category2> vcat2;
+	private Vector<String> vcat1name;
+	private Vector<String> vcat2name;
 	
 	public HomeMain(){
 		initilize();
@@ -22,11 +31,22 @@ public class HomeMain extends JPanel{
 	}
 	
 	public void initilize(){
+		vcat1 = new Vector<Category1>();
+		vcat2 = new Vector<Category2>();
+		vcat1name = new Vector<String>();
+		vcat2name = new Vector<String>();
+		vcat1name.add("선택하세요");
+		Cat1DAO cat1dao = new Cat1DAO();
+		vcat1 = cat1dao.getCat1ListAll();
+		for(int i = 0; i< vcat1.size(); i++){
+			vcat1name.add(vcat1.get(i).getName());
+		}
+		
 		JLabel lblNewLabel = new JLabel("\uAC80\uC0C9\uC870\uAC74");
 		lblNewLabel.setBounds(12, 22, 57, 15);
 		this.add(lblNewLabel);
 		
-		cb_cat1 = new JComboBox();
+		cb_cat1 = new JComboBox(vcat1name);
 		cb_cat1.setBounds(12, 47, 163, 21);
 		this.add(cb_cat1);
 		

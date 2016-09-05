@@ -58,9 +58,8 @@ public class MainView {
 		
 		JPanel homePanel = new JPanel();
 		tabbedPane.addTab("HOME", null, homePanel, null);
-		homePanel.setLayout(null);
-		
-		
+		homePanel.setLayout(new BorderLayout());
+		homePanel.add(new HomeMain());
 		
 		JPanel myPanel = new JPanel();
 		tabbedPane.addTab(" MY ", null, myPanel, null);

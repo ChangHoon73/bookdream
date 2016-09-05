@@ -8,8 +8,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class HomeMain extends JPanel{
+	private JComboBox cb_cat1;
+	private JComboBox cb_cat2;
+	private JComboBox cb_sido;
+	private JComboBox cb_gugun;
+	private JComboBox cb_dong;
+	private JTable table;
 	public HomeMain(){
 		initilize();
+		this.setLayout(null); // 현재 레이아웃을 Absolute Layout으로 변경
 	}
 	
 	public void initilize(){
@@ -17,36 +24,36 @@ public class HomeMain extends JPanel{
 		lblNewLabel.setBounds(12, 22, 57, 15);
 		this.add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(12, 47, 163, 21);
-		this.add(comboBox);
+		cb_cat1 = new JComboBox();
+		cb_cat1.setBounds(12, 47, 163, 21);
+		this.add(cb_cat1);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(187, 47, 149, 21);
-		this.add(comboBox_1);
+		cb_cat2 = new JComboBox();
+		cb_cat2.setBounds(187, 47, 149, 21);
+		this.add(cb_cat2);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(12, 79, 100, 21);
-		this.add(comboBox_2);
+		cb_sido = new JComboBox();
+		cb_sido.setBounds(12, 79, 100, 21);
+		this.add(cb_sido);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(124, 78, 100, 21);
-		this.add(comboBox_3);
+		cb_gugun = new JComboBox();
+		cb_gugun.setBounds(124, 78, 100, 21);
+		this.add(cb_gugun);
 		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(236, 79, 100, 21);
-		this.add(comboBox_4);
+		cb_dong = new JComboBox();
+		cb_dong.setBounds(236, 79, 100, 21);
+		this.add(cb_dong);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(348, 78, 97, 23);
-		this.add(btnNewButton);
+		JButton btnSearch = new JButton("\uAC80\uC0C9");
+		btnSearch.setBounds(348, 78, 97, 23);
+		this.add(btnSearch);
 		
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(12, 110, 439, 482);
 		this.add(scrollPane_1);
 		
-		JTable table = new JTable();
+		table = new JTable();
 		scrollPane_1.setViewportView(table);
 	}
 }

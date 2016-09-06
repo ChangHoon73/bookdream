@@ -10,8 +10,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import kr.or.bookdream.dao.Cat1DAO;
+import kr.or.bookdream.dao.Cat2DAO;
 import kr.or.bookdream.vo.Category1;
 import kr.or.bookdream.vo.Category2;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class HomeMain extends JPanel{
 	private JComboBox cb_cat1;
@@ -47,10 +50,23 @@ public class HomeMain extends JPanel{
 		this.add(lblNewLabel);
 		
 		cb_cat1 = new JComboBox(vcat1name);
+		cb_cat1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				System.out.println(cb_cat1.getSelectedIndex());
+				vcat2name.clear();
+				Cat2DAO cat1dao = new Cat2DAO();
+				int no = cb_cat1.getSelectedIndex()-1;
+				vcat2 = cat1dao.getCat2ListAll(vcat1.get(no).getNo());
+				for(int i = 0; i< vcat2.size(); i++){
+					vcat2name.add(vcat2.get(i).getName());
+				}
+				
+			}
+		});
 		cb_cat1.setBounds(12, 47, 163, 21);
 		this.add(cb_cat1);
 		
-		cb_cat2 = new JComboBox();
+		cb_cat2 = new JComboBox(vcat2name);
 		cb_cat2.setBounds(187, 47, 149, 21);
 		this.add(cb_cat2);
 		

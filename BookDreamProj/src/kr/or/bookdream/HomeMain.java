@@ -11,6 +11,8 @@ import javax.swing.JTable;
 
 import kr.or.bookdream.dao.Cat1DAO;
 import kr.or.bookdream.dao.Cat2DAO;
+import kr.or.bookdream.dao.GugunDAO;
+import kr.or.bookdream.dao.SidoDAO;
 import kr.or.bookdream.vo.Category1;
 import kr.or.bookdream.vo.Category2;
 import java.awt.event.ItemListener;
@@ -28,6 +30,9 @@ public class HomeMain extends JPanel{
 	private Vector<String> vcat1name;
 	private Vector<String> vcat2name;
 	
+	private Vector<String> vsido;
+	private Vector<String> vgugun;
+	private Vector<String> vdong;
 	
 	public HomeMain(){
 		initilize();
@@ -39,8 +44,18 @@ public class HomeMain extends JPanel{
 		vcat2 = new Vector<Category2>();
 		vcat1name = new Vector<String>();
 		vcat2name = new Vector<String>();
+		
+		vsido = new Vector<String>();
+		vgugun = new Vector<String>();
+		vdong = new Vector<String>();
+		
+		
 		vcat1name.add("선택하세요");
 		vcat2name.add("선택하세요");
+		vsido.add("선택하세요");
+		vgugun.add("선택하세요");
+		vdong.add("선택하세요");
+		
 		Cat1DAO cat1dao = new Cat1DAO();
 		vcat1 = cat1dao.getCat1ListAll();
 		for(int i = 0; i< vcat1.size(); i++){
@@ -71,6 +86,7 @@ public class HomeMain extends JPanel{
 				
 			}
 		});
+		
 		cb_cat1.setBounds(12, 47, 163, 21);
 		this.add(cb_cat1);
 		
@@ -78,15 +94,35 @@ public class HomeMain extends JPanel{
 		cb_cat2.setBounds(187, 47, 149, 21);
 		this.add(cb_cat2);
 		
-		cb_sido = new JComboBox();
+		SidoDAO sidodao = new SidoDAO();
+		vsido = sidodao.getSidoListAll();
+		
+		cb_sido = new JComboBox(this.vsido);
+		cb_sido.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+
+				if(e.getStateChange() == ItemEvent.SELECTED && cb_sido.getSelectedIndex() > 0 ){
+					vgugun.clear();
+					GugunDAO gugundao = new GugunDAO();
+					vgugun = gugundao.getGugunListAll(cb_sido.getSelectedItem().toString());
+//					for(int i = 0; i< vgugun.size(); i++){
+//						System.out.println(vgugun.get(i));
+//					}
+					
+					cb_gugun.setSelectedIndex(0);
+					
+				}
+				
+			}
+		});
 		cb_sido.setBounds(12, 79, 100, 21);
 		this.add(cb_sido);
-		
-		cb_gugun = new JComboBox();
+
+		cb_gugun = new JComboBox(this.vgugun);
 		cb_gugun.setBounds(124, 78, 100, 21);
 		this.add(cb_gugun);
 		
-		cb_dong = new JComboBox();
+		cb_dong = new JComboBox(this.vdong);
 		cb_dong.setBounds(236, 79, 100, 21);
 		this.add(cb_dong);
 		

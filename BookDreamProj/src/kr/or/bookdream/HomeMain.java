@@ -28,6 +28,7 @@ public class HomeMain extends JPanel{
 	private Vector<String> vcat1name;
 	private Vector<String> vcat2name;
 	
+	
 	public HomeMain(){
 		initilize();
 		this.setLayout(null); // 현재 레이아웃을 Absolute Layout으로 변경
@@ -39,6 +40,7 @@ public class HomeMain extends JPanel{
 		vcat1name = new Vector<String>();
 		vcat2name = new Vector<String>();
 		vcat1name.add("선택하세요");
+		vcat2name.add("선택하세요");
 		Cat1DAO cat1dao = new Cat1DAO();
 		vcat1 = cat1dao.getCat1ListAll();
 		for(int i = 0; i< vcat1.size(); i++){
@@ -52,14 +54,20 @@ public class HomeMain extends JPanel{
 		cb_cat1 = new JComboBox(vcat1name);
 		cb_cat1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				System.out.println(cb_cat1.getSelectedIndex());
+				cb_cat2.removeAllItems();
 				vcat2name.clear();
-				Cat2DAO cat1dao = new Cat2DAO();
-				int no = cb_cat1.getSelectedIndex()-1;
-				vcat2 = cat1dao.getCat2ListAll(vcat1.get(no).getNo());
-				for(int i = 0; i< vcat2.size(); i++){
-					vcat2name.add(vcat2.get(i).getName());
+				vcat2name.add("선택하세요");
+				if( e.getStateChange() == ItemEvent.SELECTED && cb_cat1.getSelectedIndex() > 0 ) {
+					
+					System.out.println(cb_cat1.getSelectedIndex());
+					Cat2DAO cat1dao = new Cat2DAO();
+					int indx = cb_cat1.getSelectedIndex()-1;
+					vcat2 = cat1dao.getCat2ListAll(vcat1.get(indx).getNo());
+					for(int i = 0; i< vcat2.size(); i++){
+						vcat2name.add(vcat2.get(i).getName());
+					}
 				}
+				cb_cat2.setSelectedIndex(0);
 				
 			}
 		});

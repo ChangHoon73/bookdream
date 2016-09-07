@@ -11,6 +11,7 @@ import javax.swing.JTable;
 
 import kr.or.bookdream.dao.Cat1DAO;
 import kr.or.bookdream.dao.Cat2DAO;
+import kr.or.bookdream.dao.DongDAO;
 import kr.or.bookdream.dao.GugunDAO;
 import kr.or.bookdream.dao.SidoDAO;
 import kr.or.bookdream.vo.Category1;
@@ -104,6 +105,9 @@ public class HomeMain extends JPanel{
 				if(e.getStateChange() == ItemEvent.SELECTED && cb_sido.getSelectedIndex() > 0 ){
 					vgugun.clear();
 					cb_gugun.removeAllItems();// 아이템삭제
+					cb_dong.removeAllItems();
+					cb_dong.addItem("선택하세요");
+					cb_dong.setSelectedIndex(0);
 					GugunDAO gugundao = new GugunDAO();
 					vgugun = gugundao.getGugunListAll(cb_sido.getSelectedItem().toString());
 					for(int i = 0; i< vgugun.size(); i++){
@@ -118,6 +122,21 @@ public class HomeMain extends JPanel{
 		this.add(cb_sido);
 
 		cb_gugun = new JComboBox(this.vgugun);
+		cb_gugun.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED && cb_gugun.getSelectedIndex() > 0 ){
+					vdong.clear();
+					cb_dong.removeAllItems();// 아이템삭제
+					DongDAO dongdao = new DongDAO();
+					vdong = dongdao.getDongListAll(cb_sido.getSelectedItem().toString(),
+							cb_gugun.getSelectedItem().toString());
+					for(int i = 0; i< vdong.size(); i++){
+						cb_dong.addItem(vdong.get(i));
+					}
+					cb_dong.setSelectedIndex(0);
+				}
+			}
+		});
 		cb_gugun.setBounds(124, 78, 100, 21);
 		this.add(cb_gugun);
 		

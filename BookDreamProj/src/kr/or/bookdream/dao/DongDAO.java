@@ -11,6 +11,7 @@ import kr.or.bookdream.vo.Category1;
 
 public class DongDAO {
 	public Vector<String> getDongListAll(String sido, String gugun){
+		System.out.println("sido:"+sido+" gugun:"+gugun);
 		Vector<String> vdong = new Vector<String>();
 		ConnectionPool pool = null;
 		Connection conn = null;
@@ -21,7 +22,8 @@ public class DongDAO {
 			pool = ConnectionPool.getInstance();
 			conn = pool.getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select distinct Dong from Zip where sido='"+sido+"' and gugun='"+gugun+"' ");
+			rs = stmt.executeQuery("select distinct dong from zip where sido='"+sido+"' and gugun='"+gugun+"' ");
+			System.out.println("select distinct dong from zip where sido='"+sido+"' and gugun='"+gugun+"' ");
 			while(rs.next()){
 				vdong.add( rs.getString("Dong") );
 			}

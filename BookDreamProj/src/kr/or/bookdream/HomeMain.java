@@ -8,12 +8,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
+import kr.or.bookdream.dao.BooksDAO;
 import kr.or.bookdream.dao.Cat1DAO;
 import kr.or.bookdream.dao.Cat2DAO;
 import kr.or.bookdream.dao.DongDAO;
 import kr.or.bookdream.dao.GugunDAO;
 import kr.or.bookdream.dao.SidoDAO;
+import kr.or.bookdream.vo.Books;
 import kr.or.bookdream.vo.Category1;
 import kr.or.bookdream.vo.Category2;
 import java.awt.event.ItemListener;
@@ -35,6 +38,8 @@ public class HomeMain extends JPanel{
 	private Vector<String> vgugun;
 	private Vector<String> vdong;
 	
+	private Vector<Books> vbooks;
+	
 	public HomeMain(){
 		initilize();
 		this.setLayout(null); // 현재 레이아웃을 Absolute Layout으로 변경
@@ -50,6 +55,9 @@ public class HomeMain extends JPanel{
 		vgugun = new Vector<String>();
 		vdong = new Vector<String>();
 		
+		vbooks = new Vector<Books>();
+		BooksDAO booksdao = new BooksDAO();
+		vbooks = booksdao.getBooksListAll();
 		
 		vcat1name.add("선택하세요");
 		vcat2name.add("선택하세요");
@@ -153,7 +161,22 @@ public class HomeMain extends JPanel{
 		scrollPane_1.setBounds(12, 110, 439, 482);
 		this.add(scrollPane_1);
 		
-		table = new JTable();
+		DefaultTableModel dtm = new DefaultTableModel();
+		dtm.addColumn("no");
+		dtm.addColumn("책제목");
+		dtm.addColumn("지은이");
+		dtm.addColumn("출판사");
+		
+		table = new JTable(dtm);
 		scrollPane_1.setViewportView(table);
+		
+		for(int i = 0; i< vbooks.size(); i++){
+			dtm.addRow(new Object[]{
+					vbooks.get(i).getNo(),
+					vbooks.get(i).getTitle(),
+					vbooks.get(i).getAuthor(),
+					vbooks.get(i).getPublisher()
+			});
+		}
 	}
 }

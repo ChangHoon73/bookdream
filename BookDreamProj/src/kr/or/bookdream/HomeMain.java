@@ -103,14 +103,13 @@ public class HomeMain extends JPanel{
 
 				if(e.getStateChange() == ItemEvent.SELECTED && cb_sido.getSelectedIndex() > 0 ){
 					vgugun.clear();
+					cb_gugun.removeAllItems();// 아이템삭제
 					GugunDAO gugundao = new GugunDAO();
 					vgugun = gugundao.getGugunListAll(cb_sido.getSelectedItem().toString());
-//					for(int i = 0; i< vgugun.size(); i++){
-//						System.out.println(vgugun.get(i));
-//					}
-					
+					for(int i = 0; i< vgugun.size(); i++){
+						cb_gugun.addItem(vgugun.get(i));
+					}
 					cb_gugun.setSelectedIndex(0);
-					
 				}
 				
 			}

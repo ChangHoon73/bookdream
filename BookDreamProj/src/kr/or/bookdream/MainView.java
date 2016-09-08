@@ -71,12 +71,20 @@ public class MainView {
 		tabbedPane.addTab("HISTORY", null, historyPanel, null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(573, 48, 423, 510);
+		scrollPane.setBounds(573, 48, 423, 604);
 		frame.getContentPane().add(scrollPane);
 		
 		JPanel detailPanel = new JPanel();
 		detailPanel.setLayout(new BorderLayout());
 		detailPanel.add(new HomeDetail());
 		scrollPane.setViewportView(detailPanel);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(899, 10, 97, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(790, 10, 97, 23);
+		frame.getContentPane().add(btnNewButton_1);
 	}
 }

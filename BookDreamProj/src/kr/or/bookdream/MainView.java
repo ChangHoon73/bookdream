@@ -9,6 +9,9 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import kr.or.bookdream.books.HomeDetail;
+import kr.or.bookdream.books.HomeMain;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JScrollPane;

@@ -1,4 +1,4 @@
-package kr.or.bookdream;
+package kr.or.bookdream.books;
 
 import java.util.Vector;
 

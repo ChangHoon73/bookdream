@@ -1,4 +1,4 @@
-package kr.or.bookdream;
+package kr.or.bookdream.books;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;

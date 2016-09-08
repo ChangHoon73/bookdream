@@ -10,7 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 
-public class HomeDetail extends JPanel {
+public class HomeDetailAdd extends JPanel {
 	private JTextField tf_title;
 	private JTextField tf_author;
 	private JTextField tf_isbn;
@@ -27,7 +27,7 @@ public class HomeDetail extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public HomeDetail() {
+	public HomeDetailAdd() {
 		setForeground(Color.WHITE);
 		setLayout(null);
 		
@@ -40,7 +40,7 @@ public class HomeDetail extends JPanel {
 		JLabel lblNewLabel = new JLabel("");
 		panel.add(lblNewLabel, BorderLayout.NORTH);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(HomeDetail.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
+		lblNewLabel.setIcon(new ImageIcon(HomeDetailAdd.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
 		lblNewLabel.setBackground(Color.BLACK);
 		
 		JPanel panel_1 = new JPanel();

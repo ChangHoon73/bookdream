@@ -28,6 +28,8 @@ import kr.or.bookdream.vo.Category1;
 import kr.or.bookdream.vo.Category2;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HomeMain extends JPanel{
 	private JComboBox cb_cat1;
@@ -202,6 +204,12 @@ public class HomeMain extends JPanel{
 		DefaultListSelectionModel dlsm = new DefaultListSelectionModel();
 		dlsm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table = new JTable(dtm, dtcm, dlsm);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e);
+			}
+		});
 		scrollPane_1.setViewportView(table);
 		
 		JTableHeader jth = new JTableHeader(dtcm);

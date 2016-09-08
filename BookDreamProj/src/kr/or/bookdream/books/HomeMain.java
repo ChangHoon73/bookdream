@@ -156,16 +156,16 @@ public class HomeMain extends JPanel{
 		this.add(cb_gugun);
 		
 		cb_dong = new JComboBox(this.vdong);
-		cb_dong.setBounds(236, 79, 100, 21);
+		cb_dong.setBounds(236, 79, 184, 21);
 		this.add(cb_dong);
 		
 		JButton btnSearch = new JButton("\uAC80\uC0C9");
-		btnSearch.setBounds(348, 78, 97, 23);
+		btnSearch.setBounds(432, 78, 97, 23);
 		this.add(btnSearch);
 		
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(12, 110, 439, 482);
+		scrollPane_1.setBounds(12, 110, 517, 482);
 		this.add(scrollPane_1);
 		
 		DefaultTableModel dtm = new DefaultTableModel(){
@@ -180,6 +180,7 @@ public class HomeMain extends JPanel{
 		dtm.addColumn("책제목");
 		dtm.addColumn("지은이");
 		dtm.addColumn("출판사");
+		dtm.addColumn("상태");
 		
 		DefaultTableColumnModel dtcm = new DefaultTableColumnModel();
 		TableColumn tc1 = new TableColumn(0,0);
@@ -195,6 +196,9 @@ public class HomeMain extends JPanel{
 		TableColumn tc4 = new TableColumn(3);
 		tc4.setHeaderValue("출판사");
 		dtcm.addColumn(tc4);
+		TableColumn tc5 = new TableColumn(4);
+		tc5.setHeaderValue("상태");
+		dtcm.addColumn(tc5);
 		DefaultListSelectionModel dlsm = new DefaultListSelectionModel();
 		dlsm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table = new JTable(dtm, dtcm, dlsm);

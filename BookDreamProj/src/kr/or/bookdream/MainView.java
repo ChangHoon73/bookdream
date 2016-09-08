@@ -22,7 +22,7 @@ public class MainView {
 
 	private JFrame frame;
 	private JTable table;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +56,7 @@ public class MainView {
 		frame.getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 21, 468, 631);
+		tabbedPane.setBounds(12, 21, 549, 631);
 		frame.getContentPane().add(tabbedPane);
 		
 		JPanel homePanel = new JPanel();
@@ -71,7 +71,7 @@ public class MainView {
 		tabbedPane.addTab("HISTORY", null, historyPanel, null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(492, 48, 504, 604);
+		scrollPane.setBounds(573, 48, 423, 510);
 		frame.getContentPane().add(scrollPane);
 		
 		JPanel detailPanel = new JPanel();

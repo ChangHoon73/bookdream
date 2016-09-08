@@ -5,21 +5,65 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+
+import kr.or.bookdream.dao.BooksDAO;
+import kr.or.bookdream.vo.Books;
+
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Vector;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class HomeDetail extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
-	public HomeDetail() {
+	private int booksno;
+	private JLabel lbl_title;
+	private JLabel lbl_author;
+	private JLabel lbl_isbn;
+	private JLabel lbl_publisher;
+	private JLabel lbl_pdate;
+	private JLabel lbl_edition;
+	private JLabel lbl_status;
+	private JLabel lbl_member;
+	private JLabel lbl_rpoint;
+	private JLabel lbl_category1;
+	private JLabel lbl_category2;
+	private JLabel lbl_registdate;
+	private JLabel lbl_image;
+	
+	public HomeDetail(){
+		initialize();
+	}
+	
+	public HomeDetail(int booksno) {
+		this.booksno = booksno;
+		
+		initialize();
+		
+		BooksDAO booksdao = new BooksDAO();
+		Vector<Books> vbooks = booksdao.getBooksSelectId(booksno);
+		
+		lbl_title.setText(vbooks.get(0).getTitle());
+		lbl_author.setText(vbooks.get(0).getAuthor());
+		lbl_isbn.setText(vbooks.get(0).getIsbn());
+		lbl_publisher.setText(vbooks.get(0).getPublisher());
+		lbl_pdate.setText(vbooks.get(0).getPdate());
+		lbl_edition.setText(""+vbooks.get(0).getEdition());
+		lbl_status.setText(vbooks.get(0).getStatus());
+		lbl_registdate.setText(vbooks.get(0).getRegidate());
+		lbl_rpoint.setText(""+vbooks.get(0).getRpoint());
+		//lbl_title.setText(vbooks.get(0).getTitle());
+		
+	}
+	
+	private void initialize() {
 		setForeground(Color.WHITE);
 		setLayout(null);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLACK);
@@ -27,11 +71,11 @@ public class HomeDetail extends JPanel {
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("");
-		panel.add(lblNewLabel, BorderLayout.NORTH);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(HomeDetail.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
-		lblNewLabel.setBackground(Color.BLACK);
+		lbl_image = new JLabel("");
+		panel.add(lbl_image, BorderLayout.NORTH);
+		lbl_image.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_image.setIcon(new ImageIcon(HomeDetail.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
+		lbl_image.setBackground(Color.BLACK);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(147, 31, 276, 371);
@@ -93,48 +137,48 @@ public class HomeDetail extends JPanel {
 		label_9.setBounds(12, 303, 57, 15);
 		panel_1.add(label_9);
 		
-		JLabel lbl_title = new JLabel("");
-		lbl_title.setBounds(81, 10, 57, 15);
+		lbl_title = new JLabel("");
+		lbl_title.setBounds(81, 10, 183, 15);
 		panel_1.add(lbl_title);
 		
-		JLabel lbl_author = new JLabel("");
-		lbl_author.setBounds(81, 41, 57, 15);
+		lbl_author = new JLabel("");
+		lbl_author.setBounds(81, 41, 183, 15);
 		panel_1.add(lbl_author);
 		
-		JLabel lbl_isbn = new JLabel("");
-		lbl_isbn.setBounds(81, 73, 57, 15);
+		lbl_isbn = new JLabel("");
+		lbl_isbn.setBounds(81, 73, 183, 15);
 		panel_1.add(lbl_isbn);
 		
-		JLabel lbl_publisher = new JLabel("");
-		lbl_publisher.setBounds(81, 101, 57, 15);
+		lbl_publisher = new JLabel("");
+		lbl_publisher.setBounds(81, 101, 183, 15);
 		panel_1.add(lbl_publisher);
 		
-		JLabel lbl_pdate = new JLabel("");
-		lbl_pdate.setBounds(81, 129, 57, 15);
+		lbl_pdate = new JLabel("");
+		lbl_pdate.setBounds(81, 129, 183, 15);
 		panel_1.add(lbl_pdate);
 		
-		JLabel lbl_edition = new JLabel("");
-		lbl_edition.setBounds(81, 157, 57, 15);
+		lbl_edition = new JLabel("");
+		lbl_edition.setBounds(81, 157, 183, 15);
 		panel_1.add(lbl_edition);
 		
-		JLabel lbl_status = new JLabel("");
-		lbl_status.setBounds(81, 185, 57, 15);
+		lbl_status = new JLabel("");
+		lbl_status.setBounds(81, 185, 183, 15);
 		panel_1.add(lbl_status);
 		
-		JLabel lbl_member = new JLabel("");
-		lbl_member.setBounds(81, 213, 57, 15);
+		lbl_member = new JLabel("");
+		lbl_member.setBounds(81, 213, 183, 15);
 		panel_1.add(lbl_member);
 		
-		JLabel lbl_rpoint = new JLabel("0");
-		lbl_rpoint.setBounds(81, 241, 57, 15);
+		lbl_rpoint = new JLabel("0");
+		lbl_rpoint.setBounds(81, 241, 183, 15);
 		panel_1.add(lbl_rpoint);
 		
-		JLabel lbl_category1 = new JLabel("");
-		lbl_category1.setBounds(81, 275, 57, 15);
+		lbl_category1 = new JLabel("");
+		lbl_category1.setBounds(81, 275, 183, 15);
 		panel_1.add(lbl_category1);
 		
-		JLabel lbl_category2 = new JLabel("");
-		lbl_category2.setBounds(81, 303, 57, 15);
+		lbl_category2 = new JLabel("");
+		lbl_category2.setBounds(81, 303, 183, 15);
 		panel_1.add(lbl_category2);
 		
 		JLabel label_11 = new JLabel("\uB4F1\uB85D\uC77C");
@@ -142,13 +186,13 @@ public class HomeDetail extends JPanel {
 		label_11.setBounds(12, 328, 57, 15);
 		panel_1.add(label_11);
 		
-		JLabel lbl_registdate = new JLabel("");
-		lbl_registdate.setBounds(81, 328, 57, 15);
+		lbl_registdate = new JLabel("");
+		lbl_registdate.setBounds(81, 328, 183, 15);
 		panel_1.add(lbl_registdate);
 		
 		JButton btn_add = new JButton("\uB4F1\uB85D");
 		btn_add.setBounds(180, 463, 97, 23);
 		add(btn_add);
-
+		
 	}
 }

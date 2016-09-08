@@ -17,6 +17,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.bookdream.MainView;
 import kr.or.bookdream.dao.BooksDAO;
 import kr.or.bookdream.dao.Cat1DAO;
 import kr.or.bookdream.dao.Cat2DAO;
@@ -32,6 +33,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HomeMain extends JPanel{
+	private MainView mMainView; 
 	private JComboBox cb_cat1;
 	private JComboBox cb_cat2;
 	private JComboBox cb_sido;
@@ -49,7 +51,8 @@ public class HomeMain extends JPanel{
 	
 	private Vector<Books> vbooks;
 	
-	public HomeMain(){
+	public HomeMain(MainView mMainView){
+		this.mMainView = mMainView;
 		initilize();
 		this.setLayout(null); // 현재 레이아웃을 Absolute Layout으로 변경
 	}
@@ -207,7 +210,12 @@ public class HomeMain extends JPanel{
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(e);
+				int seletedIndex = table.getSelectedRow();
+				int booksno = (int) table.getValueAt(seletedIndex, 0);
+				HomeDetail homeDetail = new HomeDetail(booksno);
+				mMainView.setDetailPanel(homeDetail);
+				System.out.println(booksno);
+				
 			}
 		});
 		scrollPane_1.setViewportView(table);

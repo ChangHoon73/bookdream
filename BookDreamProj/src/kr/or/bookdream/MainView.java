@@ -22,6 +22,12 @@ public class MainView {
 
 	private JFrame frame;
 	private JTable table;
+	private JPanel homePanel;
+	private JPanel myPanel;
+	private JPanel historyPanel;
+	private JPanel detailPanel;
+	private JTabbedPane tabbedPane;
+	private JScrollPane detailScrollPane;
 	
 	/**
 	 * Launch the application.
@@ -55,29 +61,31 @@ public class MainView {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(12, 21, 549, 631);
 		frame.getContentPane().add(tabbedPane);
 		
-		JPanel homePanel = new JPanel();
+		homePanel = new JPanel();
 		tabbedPane.addTab("HOME", null, homePanel, null);
 		homePanel.setLayout(new BorderLayout());
-		homePanel.add(new HomeMain());
+		homePanel.add(new HomeMain(this));
 		
-		JPanel myPanel = new JPanel();
+		myPanel = new JPanel();
 		tabbedPane.addTab(" MY ", null, myPanel, null);
+		tabbedPane.setEnabledAt(1, false);
 		
-		JPanel historyPanel = new JPanel();
+		historyPanel = new JPanel();
 		tabbedPane.addTab("HISTORY", null, historyPanel, null);
+		tabbedPane.setEnabledAt(2, false);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(573, 48, 423, 604);
-		frame.getContentPane().add(scrollPane);
+		detailScrollPane = new JScrollPane();
+		detailScrollPane.setBounds(573, 48, 423, 604);
+		frame.getContentPane().add(detailScrollPane);
 		
-		JPanel detailPanel = new JPanel();
+		detailPanel = new JPanel();
 		detailPanel.setLayout(new BorderLayout());
 		detailPanel.add(new HomeDetail());
-		scrollPane.setViewportView(detailPanel);
+		detailScrollPane.setViewportView(detailPanel);
 		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(899, 10, 97, 23);
@@ -86,5 +94,11 @@ public class MainView {
 		JButton btnNewButton_1 = new JButton("New button");
 		btnNewButton_1.setBounds(790, 10, 97, 23);
 		frame.getContentPane().add(btnNewButton_1);
+	}
+	
+	public void setDetailPanel(JPanel pDetail){
+		this.detailPanel.removeAll();
+		this.detailPanel.add(pDetail);
+		this.detailPanel.updateUI();
 	}
 }

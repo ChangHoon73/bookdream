@@ -23,7 +23,7 @@ public class ConnectionPool {
 
 	public static synchronized ConnectionPool getInstance() throws SQLException, ClassNotFoundException {
 		if (cp == null) {
-			cp = new ConnectionPool(4, 20);
+			cp = new ConnectionPool(10, 20);
 		}
 		return cp;
 	}

@@ -2,13 +2,20 @@ package kr.or.bookdream;
 
 import java.util.Vector;
 
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.plaf.basic.BasicComboBoxUI.ComboBoxLayoutManager;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import kr.or.bookdream.dao.BooksDAO;
 import kr.or.bookdream.dao.Cat1DAO;
@@ -161,14 +168,42 @@ public class HomeMain extends JPanel{
 		scrollPane_1.setBounds(12, 110, 439, 482);
 		this.add(scrollPane_1);
 		
-		DefaultTableModel dtm = new DefaultTableModel();
+		DefaultTableModel dtm = new DefaultTableModel(){
+			// 에디터 금지
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
 		dtm.addColumn("no");
 		dtm.addColumn("책제목");
 		dtm.addColumn("지은이");
 		dtm.addColumn("출판사");
 		
-		table = new JTable(dtm);
+		DefaultTableColumnModel dtcm = new DefaultTableColumnModel();
+		TableColumn tc1 = new TableColumn(0,0);
+		tc1.setHeaderValue("no");
+		tc1.setMaxWidth(0);
+		dtcm.addColumn(tc1);
+		TableColumn tc2 = new TableColumn(1, 200);
+		tc2.setHeaderValue("책제목");
+		dtcm.addColumn(tc2);
+		TableColumn tc3 = new TableColumn(2);
+		tc3.setHeaderValue("지은이");
+		dtcm.addColumn(tc3);
+		TableColumn tc4 = new TableColumn(3);
+		tc4.setHeaderValue("출판사");
+		dtcm.addColumn(tc4);
+		DefaultListSelectionModel dlsm = new DefaultListSelectionModel();
+		dlsm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table = new JTable(dtm, dtcm, dlsm);
 		scrollPane_1.setViewportView(table);
+		
+		JTableHeader jth = new JTableHeader(dtcm);
+		jth.setReorderingAllowed(false); // 위치변경
+		jth.setResizingAllowed(false); // 크기변경
+		table.setTableHeader(jth);
 		
 		for(int i = 0; i< vbooks.size(); i++){
 			dtm.addRow(new Object[]{

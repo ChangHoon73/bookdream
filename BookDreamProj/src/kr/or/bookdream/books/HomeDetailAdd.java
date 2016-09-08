@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class HomeDetailAdd extends JPanel {
 	private JTextField tf_title;
@@ -19,10 +21,6 @@ public class HomeDetailAdd extends JPanel {
 	private JTextField tf_edition;
 	private JTextField textField_6;
 	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField;
 
 	/**
 	 * Create the panel.
@@ -75,7 +73,7 @@ public class HomeDetailAdd extends JPanel {
 		
 		tf_isbn = new JTextField();
 		tf_isbn.setColumns(10);
-		tf_isbn.setBounds(81, 70, 172, 21);
+		tf_isbn.setBounds(81, 70, 87, 21);
 		panel_1.add(tf_isbn);
 		
 		JLabel label_2 = new JLabel("\uCD9C\uD310\uC0AC");
@@ -128,57 +126,41 @@ public class HomeDetailAdd extends JPanel {
 		textField_7.setBounds(81, 210, 172, 21);
 		panel_1.add(textField_7);
 		
-		JLabel label_6 = new JLabel("\uB4F1\uB85D\uC77C");
-		label_6.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_6.setBounds(12, 241, 57, 15);
-		panel_1.add(label_6);
-		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(81, 238, 172, 21);
-		panel_1.add(textField_8);
-		
 		JLabel label_7 = new JLabel("\uCD94\uCC9C\uC810\uC218");
 		label_7.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_7.setBounds(12, 271, 57, 15);
+		label_7.setBounds(12, 241, 57, 15);
 		panel_1.add(label_7);
-		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(81, 268, 172, 21);
-		panel_1.add(textField_9);
 		
 		JLabel label_8 = new JLabel("\uBD84\uB9581");
 		label_8.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_8.setBounds(12, 299, 57, 15);
+		label_8.setBounds(12, 275, 57, 15);
 		panel_1.add(label_8);
-		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(81, 296, 172, 21);
-		panel_1.add(textField_10);
 		
 		JLabel label_9 = new JLabel("\uBD84\uB9582");
 		label_9.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_9.setBounds(12, 327, 57, 15);
+		label_9.setBounds(12, 303, 57, 15);
 		panel_1.add(label_9);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(81, 324, 172, 21);
-		panel_1.add(textField);
+		JButton btnNewButton = new JButton("\uAC80\uC0C9");
+		btnNewButton.setBounds(180, 69, 73, 23);
+		panel_1.add(btnNewButton);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5"}));
+		comboBox.setBounds(81, 241, 172, 21);
+		panel_1.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(81, 272, 172, 21);
+		panel_1.add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(81, 300, 172, 21);
+		panel_1.add(comboBox_2);
 		
 		JButton btn_add = new JButton("\uB4F1\uB85D");
-		btn_add.setBounds(23, 463, 97, 23);
+		btn_add.setBounds(180, 463, 97, 23);
 		add(btn_add);
-		
-		JButton btn_modify = new JButton("\uC218\uC815");
-		btn_modify.setBounds(162, 463, 97, 23);
-		add(btn_modify);
-		
-		JButton btn_delete = new JButton("\uC0AD\uC81C");
-		btn_delete.setBounds(297, 463, 97, 23);
-		add(btn_delete);
 
 	}
 }

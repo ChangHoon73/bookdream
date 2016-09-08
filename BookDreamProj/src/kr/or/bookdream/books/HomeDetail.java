@@ -157,17 +157,17 @@ public class HomeDetail extends JPanel {
 		textField_10.setBounds(81, 296, 172, 21);
 		panel_1.add(textField_10);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(23, 463, 97, 23);
-		add(btnNewButton);
+		JButton btn_add = new JButton("\uB4F1\uB85D");
+		btn_add.setBounds(23, 463, 97, 23);
+		add(btn_add);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(162, 463, 97, 23);
-		add(btnNewButton_1);
+		JButton btn_modify = new JButton("\uC218\uC815");
+		btn_modify.setBounds(162, 463, 97, 23);
+		add(btn_modify);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(297, 463, 97, 23);
-		add(btnNewButton_2);
+		JButton btn_delete = new JButton("\uC0AD\uC81C");
+		btn_delete.setBounds(297, 463, 97, 23);
+		add(btn_delete);
 
 	}
 }

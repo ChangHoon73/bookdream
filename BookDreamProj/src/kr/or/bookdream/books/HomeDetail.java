@@ -12,10 +12,18 @@ import kr.or.bookdream.vo.Books;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 
 public class HomeDetail extends JPanel {
@@ -34,6 +42,7 @@ public class HomeDetail extends JPanel {
 	private JLabel lbl_category2;
 	private JLabel lbl_registdate;
 	private JLabel lbl_image;
+	private JPanel imgPanel;
 	
 	public HomeDetail(){
 		initialize();
@@ -57,7 +66,7 @@ public class HomeDetail extends JPanel {
 		lbl_registdate.setText(vbooks.get(0).getRegidate());
 		lbl_rpoint.setText(""+vbooks.get(0).getRpoint());
 		//lbl_title.setText(vbooks.get(0).getTitle());
-		
+		getLinksImg(vbooks.get(0).getLink());
 	}
 	
 	private void initialize() {
@@ -65,14 +74,14 @@ public class HomeDetail extends JPanel {
 		setLayout(null);
 		
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setBounds(23, 34, 112, 152);
-		add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		imgPanel = new JPanel();
+		imgPanel.setBackground(Color.BLACK);
+		imgPanel.setBounds(23, 34, 112, 152);
+		add(imgPanel);
+		imgPanel.setLayout(new BorderLayout(0, 0));
 		
 		lbl_image = new JLabel("");
-		panel.add(lbl_image, BorderLayout.NORTH);
+		imgPanel.add(lbl_image, BorderLayout.NORTH);
 		lbl_image.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_image.setIcon(new ImageIcon(HomeDetail.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
 		lbl_image.setBackground(Color.BLACK);
@@ -193,6 +202,26 @@ public class HomeDetail extends JPanel {
 		JButton btn_add = new JButton("\uB4F1\uB85D");
 		btn_add.setBounds(180, 463, 97, 23);
 		add(btn_add);
+		
+	}
+	
+	private void getLinksImg(String linkurl){
+		URL url = null;
+		try {
+			url = new URL(linkurl);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(url);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ImageIcon imgIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(imgPanel.getWidth(), imgPanel.getHeight(), Image.SCALE_DEFAULT));
+		lbl_image.setIcon(imgIcon);
 		
 	}
 }

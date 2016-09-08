@@ -28,6 +28,7 @@ public class MainView {
 	private JPanel detailPanel;
 	private JTabbedPane tabbedPane;
 	private JScrollPane detailScrollPane;
+	private JPanel categoryPanel;
 	
 	/**
 	 * Launch the application.
@@ -77,6 +78,10 @@ public class MainView {
 		historyPanel = new JPanel();
 		tabbedPane.addTab("HISTORY", null, historyPanel, null);
 		tabbedPane.setEnabledAt(2, false);
+		
+		categoryPanel = new JPanel();
+		tabbedPane.addTab("CATEGORY", null, categoryPanel, null);
+		tabbedPane.setEnabledAt(3, false);
 		
 		detailScrollPane = new JScrollPane();
 		detailScrollPane.setBounds(573, 48, 423, 604);

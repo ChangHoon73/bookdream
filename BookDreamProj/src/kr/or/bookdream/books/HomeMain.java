@@ -212,7 +212,7 @@ public class HomeMain extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				int seletedIndex = table.getSelectedRow();
 				int booksno = (int) table.getValueAt(seletedIndex, 0);
-				HomeDetail homeDetail = new HomeDetail(booksno);
+				HomeDetail homeDetail = new HomeDetail(mMainView, booksno);
 				mMainView.setDetailPanel(homeDetail);
 				System.out.println(booksno);
 				

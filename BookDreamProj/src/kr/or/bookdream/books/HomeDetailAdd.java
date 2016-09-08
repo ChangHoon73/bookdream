@@ -21,6 +21,7 @@ public class HomeDetailAdd extends JPanel {
 	private JTextField tf_edition;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField tf_link;
 
 	/**
 	 * Create the panel.
@@ -158,7 +159,17 @@ public class HomeDetailAdd extends JPanel {
 		comboBox_2.setBounds(81, 300, 172, 21);
 		panel_1.add(comboBox_2);
 		
-		JButton btn_add = new JButton("\uB4F1\uB85D");
+		JLabel label_6 = new JLabel("\uCC45\uC774\uBBF8\uC9C0");
+		label_6.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_6.setBounds(12, 331, 57, 15);
+		panel_1.add(label_6);
+		
+		tf_link = new JTextField();
+		tf_link.setColumns(10);
+		tf_link.setBounds(81, 328, 172, 21);
+		panel_1.add(tf_link);
+		
+		JButton btn_add = new JButton("\uB4F1\uB85D\uD558\uAE30");
 		btn_add.setBounds(180, 463, 97, 23);
 		add(btn_add);
 

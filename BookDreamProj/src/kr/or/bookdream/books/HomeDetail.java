@@ -6,6 +6,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+import kr.or.bookdream.MainView;
 import kr.or.bookdream.dao.BooksDAO;
 import kr.or.bookdream.vo.Books;
 
@@ -25,9 +26,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HomeDetail extends JPanel {
-
+	private MainView mMainView;
+	
 	private int booksno;
 	private JLabel lbl_title;
 	private JLabel lbl_author;
@@ -48,7 +52,8 @@ public class HomeDetail extends JPanel {
 		initialize();
 	}
 	
-	public HomeDetail(int booksno) {
+	public HomeDetail(MainView mMainView, int booksno) {
+		this.mMainView = mMainView;
 		this.booksno = booksno;
 		
 		initialize();
@@ -199,7 +204,13 @@ public class HomeDetail extends JPanel {
 		lbl_registdate.setBounds(81, 328, 183, 15);
 		panel_1.add(lbl_registdate);
 		
-		JButton btn_add = new JButton("\uB4F1\uB85D");
+		//등록버튼 
+		JButton btn_add = new JButton("\uCC45\uB4F1\uB85D");
+		btn_add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mMainView.setDetailPanel(new HomeDetailAdd());
+			}
+		});
 		btn_add.setBounds(180, 463, 97, 23);
 		add(btn_add);
 		

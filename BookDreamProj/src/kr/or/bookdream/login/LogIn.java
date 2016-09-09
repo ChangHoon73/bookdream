@@ -95,12 +95,12 @@ public class LogIn {
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("?");
-		btnNewButton_2.setFont(new Font("±¼¸²", Font.PLAIN, 15));
+		btnNewButton_2.setFont(new Font("±¼¸²", Font.PLAIN, 12));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.setBounds(400, 322, 50, 50);
+		btnNewButton_2.setBounds(410, 322, 40, 40);
 		panel.add(btnNewButton_2);
 		
 		JLabel lblNewLabel = new JLabel("BookDream");

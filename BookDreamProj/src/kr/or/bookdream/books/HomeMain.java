@@ -93,7 +93,7 @@ public class HomeMain extends JPanel{
 			public void itemStateChanged(ItemEvent e) {
 				cb_cat2.removeAllItems();
 				vcat2name.clear();
-				vcat2name.add("선택하세요");
+				vcat2name.add("구군선택");
 				if( e.getStateChange() == ItemEvent.SELECTED && cb_cat1.getSelectedIndex() > 0 ) {
 					
 					System.out.println(cb_cat1.getSelectedIndex());
@@ -127,7 +127,7 @@ public class HomeMain extends JPanel{
 					vgugun.clear();
 					cb_gugun.removeAllItems();// 아이템삭제
 					cb_dong.removeAllItems();
-					cb_dong.addItem("선택하세요");
+					cb_dong.addItem("동선택");
 					cb_dong.setSelectedIndex(0);
 					GugunDAO gugundao = new GugunDAO();
 					vgugun = gugundao.getGugunListAll(cb_sido.getSelectedItem().toString());

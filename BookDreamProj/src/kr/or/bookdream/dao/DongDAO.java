@@ -17,7 +17,7 @@ public class DongDAO {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		vdong.add("선택하세요");
+		vdong.add("동선택");
 		try{
 			pool = ConnectionPool.getInstance();
 			conn = pool.getConnection();

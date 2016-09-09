@@ -18,7 +18,7 @@ public class GugunDAO {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		vgugun.add("선택하세요");
+		vgugun.add("구군선택");
 		try{
 			pool = ConnectionPool.getInstance();
 			conn = pool.getConnection();

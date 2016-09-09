@@ -16,7 +16,7 @@ public class SidoDAO {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		vsido.add("선택하세요");
+		vsido.add("시도선택");
 		try{
 			pool = ConnectionPool.getInstance();
 			conn = pool.getConnection();

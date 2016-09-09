@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 
 import kr.or.bookdream.books.HomeDetail;
 import kr.or.bookdream.books.HomeMain;
+import kr.or.bookdream.history.HistoryDetail;
+import kr.or.bookdream.history.HistoryMain;
 import kr.or.bookdream.login.Login;
 
 import java.awt.BorderLayout;
@@ -19,6 +21,8 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class MainView {
 
@@ -36,6 +40,11 @@ public class MainView {
 	private String MembersName;
 //	private MainView window;
 	private Login dialog;
+	
+	private static final int HOME = 0;
+	private static final int MY = 1;
+	private static final int HISTORY = 2;
+	private static final int CATEGORY = 3;
 	/**
 	 * Launch the application.
 	 */
@@ -75,8 +84,28 @@ public class MainView {
 		frame.getContentPane().setLayout(null);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				switch(	tabbedPane.getSelectedIndex()){
+				case HOME:
+					setDetailPanel(new HomeDetail(MainView.this));
+					break;
+				case MY:
+					break;
+				case HISTORY:
+					setDetailPanel(new HistoryDetail(MainView.this,0));
+					break;
+				case CATEGORY:
+					break;
+					default:
+						
+				}
+			}
+		});
 		tabbedPane.setBounds(12, 21, 549, 631);
 		frame.getContentPane().add(tabbedPane);
+		
+		detailPanel = new JPanel();
 		
 		homePanel = new JPanel();
 		tabbedPane.addTab("HOME", null, homePanel, null);
@@ -89,7 +118,8 @@ public class MainView {
 		
 		historyPanel = new JPanel();
 		tabbedPane.addTab("HISTORY", null, historyPanel, null);
-		tabbedPane.setEnabledAt(2, false);
+		historyPanel.setLayout(new BorderLayout());
+		historyPanel.add(new HistoryMain(this)); // HomeMain에 MainView객체 전달
 		
 		categoryPanel = new JPanel();
 		tabbedPane.addTab("CATEGORY", null, categoryPanel, null);
@@ -99,7 +129,7 @@ public class MainView {
 		detailScrollPane.setBounds(573, 48, 423, 604);
 		frame.getContentPane().add(detailScrollPane);
 		
-		detailPanel = new JPanel();
+		
 		detailPanel.setLayout(new BorderLayout());
 		detailPanel.add(new HomeDetail(this)); // 기본적으로 HomeDetail을 표시
 		detailScrollPane.setViewportView(detailPanel);

@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
+import kr.or.bookdream.MainView;
 import kr.or.bookdream.dao.HistoryDAO;
 import kr.or.bookdream.vo.History;
 import java.awt.event.ActionListener;
@@ -28,10 +29,15 @@ public class HistoryDetail extends JPanel {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private Vector<History> vhistory;
-
-	public HistoryDetail(int books_no) 
+	private MainView mMainView;
+	
+	public HistoryDetail(MainView mMainView, int books_no) 
 	{
-
+		this.mMainView = mMainView;
+		initialize(books_no);
+	}
+	
+	public void initialize(int books_no){
 		setForeground(Color.WHITE);
 		setLayout(null);
 		
@@ -96,6 +102,6 @@ public class HistoryDetail extends JPanel {
 					vhistory.get(i).getWdate(),
 					vhistory.get(i).getMembers_name()
 			});
-		}		
+		}	
 	}
 }

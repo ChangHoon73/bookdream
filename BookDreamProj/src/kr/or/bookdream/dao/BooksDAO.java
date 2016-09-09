@@ -144,18 +144,17 @@ public class BooksDAO {
 			pstmt.setInt(11, members_no );	
 			pstmt.setInt(12, category1_no );	
 			pstmt.setInt(13, category2_no );	
-			bresult = pstmt.execute();	
-			
+			pstmt.execute();	
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select max(no) from books ");
-			System.out.println("maxrow:"+pstmt.getMaxRows());
-			{
+			rs = stmt.executeQuery("select max(no) maxno from books ");
+			rs.next();
+		
 				pstmt2 = conn.prepareStatement("insert into history(wdate,books_no, members_no) values(?,?,?)");
 				pstmt2.setString(1, cu.getNowTime());
-				pstmt2.setInt(2, rs.getInt(0));
+				pstmt2.setInt(2, rs.getInt("maxno"));
 				pstmt2.setInt(3, members_no);
 				pstmt2.execute();
-			}
+				bresult = true;
 		}catch(Exception err){
 			System.err.println(err.toString());
 		}finally {

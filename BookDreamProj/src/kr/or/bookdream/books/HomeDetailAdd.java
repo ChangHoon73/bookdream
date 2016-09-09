@@ -28,7 +28,6 @@ public class HomeDetailAdd extends JPanel {
 	private JTextField tf_isbn;
 	private JTextField tf_publisher;
 	private JTextField tf_pdate;
-	private JTextField tf_edition;
 	private JTextField textField_7;
 	private JTextField tf_link;
 	private JComboBox cb_status;
@@ -36,6 +35,7 @@ public class HomeDetailAdd extends JPanel {
 	
 	private int category1_no;
 	private int category2_no;
+	private JComboBox cb_edition;
 	/**
 	 * Create the panel.
 	 */
@@ -116,11 +116,6 @@ public class HomeDetailAdd extends JPanel {
 		label_3.setBounds(12, 157, 57, 15);
 		panel_1.add(label_3);
 		
-		tf_edition = new JTextField();
-		tf_edition.setColumns(10);
-		tf_edition.setBounds(81, 154, 172, 21);
-		panel_1.add(tf_edition);
-		
 		JLabel label_4 = new JLabel("\uC0C1\uD0DC");
 		label_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		label_4.setBounds(12, 185, 57, 15);
@@ -183,6 +178,11 @@ public class HomeDetailAdd extends JPanel {
 		cb_status.setBounds(81, 182, 172, 21);
 		panel_1.add(cb_status);
 		
+		cb_edition = new JComboBox();
+		cb_edition.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		cb_edition.setBounds(81, 157, 172, 21);
+		panel_1.add(cb_edition);
+		
 		JButton btn_add = new JButton("\uB4F1\uB85D\uD558\uAE30");
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -202,7 +202,7 @@ public class HomeDetailAdd extends JPanel {
 				tf_author.getText(), 
 				tf_publisher.getText(), 
 				tf_pdate.getText(), 
-				Integer.parseInt(tf_edition.getText()), 
+				Integer.parseInt(cb_edition.getSelectedItem().toString()), 
 				cb_status.getSelectedItem().toString(), 
 				tf_link.getText(), 
 				Integer.parseInt(cb_rpoint.getSelectedItem().toString()), 

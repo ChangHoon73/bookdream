@@ -30,7 +30,7 @@ public class MainView {
 	private JScrollPane detailScrollPane;
 	private JPanel categoryPanel;
 	
-	private int MembersNo = 0;
+	private int MembersNo = 1;
 	private String MembersName;
 	/**
 	 * Launch the application.

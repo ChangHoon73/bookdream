@@ -7,11 +7,11 @@ public class Books {
 	private String author;
 	private String publisher;
 	private String pdate;
-	private int edition;
+	private int edition = 1;
 	private String status;
 	private String link;
 	private String regidate;
-	private int rpoint;
+	private int rpoint = 0;
 	private int members_no;
 	private int category1_no;
 	private int category2_no;

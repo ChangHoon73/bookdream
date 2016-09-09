@@ -11,6 +11,8 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HomeDetailAdd extends JPanel {
 	private JTextField tf_title;
@@ -170,6 +172,11 @@ public class HomeDetailAdd extends JPanel {
 		panel_1.add(tf_link);
 		
 		JButton btn_add = new JButton("\uB4F1\uB85D\uD558\uAE30");
+		btn_add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btn_add.setBounds(180, 463, 97, 23);
 		add(btn_add);
 

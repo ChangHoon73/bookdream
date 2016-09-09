@@ -69,7 +69,7 @@ public class MainView {
 		homePanel = new JPanel();
 		tabbedPane.addTab("HOME", null, homePanel, null);
 		homePanel.setLayout(new BorderLayout());
-		homePanel.add(new HomeMain(this));
+		homePanel.add(new HomeMain(this)); // HomeMain에 MainView객체 전달
 		
 		myPanel = new JPanel();
 		tabbedPane.addTab(" MY ", null, myPanel, null);
@@ -89,7 +89,7 @@ public class MainView {
 		
 		detailPanel = new JPanel();
 		detailPanel.setLayout(new BorderLayout());
-		detailPanel.add(new HomeDetail());
+		detailPanel.add(new HomeDetail(this)); // 기본적으로 HomeDetail을 표시
 		detailScrollPane.setViewportView(detailPanel);
 		
 		JButton btnNewButton = new JButton("New button");
@@ -102,8 +102,8 @@ public class MainView {
 	}
 	
 	public void setDetailPanel(JPanel pDetail){
-		this.detailPanel.removeAll();
-		this.detailPanel.add(pDetail);
-		this.detailPanel.updateUI();
+		this.detailPanel.removeAll(); // 기존DetailPanel내용 삭제
+		this.detailPanel.add(pDetail); // pDetail 추가
+		this.detailPanel.updateUI(); // 새로고침
 	}
 }

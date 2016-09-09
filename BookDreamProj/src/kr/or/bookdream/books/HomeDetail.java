@@ -48,8 +48,9 @@ public class HomeDetail extends JPanel {
 	private JLabel lbl_image;
 	private JPanel imgPanel;
 	
-	public HomeDetail(){
-		initialize();
+	public HomeDetail(MainView mMainView){
+		this.mMainView = mMainView;
+		initialize(); //  추가
 	}
 	
 	public HomeDetail(MainView mMainView, int booksno) {
@@ -208,6 +209,7 @@ public class HomeDetail extends JPanel {
 		JButton btn_add = new JButton("\uCC45\uB4F1\uB85D");
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				// HomeDetailAdd 패널 호출
 				mMainView.setDetailPanel(new HomeDetailAdd());
 			}
 		});
@@ -216,6 +218,10 @@ public class HomeDetail extends JPanel {
 		
 	}
 	
+	/**
+	 * 이미지 링크주소를 받아서 이미지를 뽑아서 이미지 라벨에 적용 함수
+	 * @param linkurl
+	 */
 	private void getLinksImg(String linkurl){
 		URL url = null;
 		try {
@@ -231,7 +237,15 @@ public class HomeDetail extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ImageIcon imgIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(imgPanel.getWidth(), imgPanel.getHeight(), Image.SCALE_DEFAULT));
+		// 이미지를 사이즈에 맞게 축소
+		ImageIcon imgscale = new ImageIcon(img);
+		Image image = imgscale.getImage().getScaledInstance(
+				imgPanel.getWidth(), // 가로크기
+				imgPanel.getHeight(), // 세로크기
+				Image.SCALE_DEFAULT);
+		ImageIcon imgIcon = new ImageIcon(
+				image
+				);
 		lbl_image.setIcon(imgIcon);
 		
 	}

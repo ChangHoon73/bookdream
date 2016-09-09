@@ -30,6 +30,8 @@ public class MainView {
 	private JScrollPane detailScrollPane;
 	private JPanel categoryPanel;
 	
+	private int MembersNo = 0;
+	private String MembersName;
 	/**
 	 * Launch the application.
 	 */
@@ -105,5 +107,21 @@ public class MainView {
 		this.detailPanel.removeAll(); // 기존DetailPanel내용 삭제
 		this.detailPanel.add(pDetail); // pDetail 추가
 		this.detailPanel.updateUI(); // 새로고침
+	}
+	
+	public int getMembersNo() {
+		return MembersNo;
+	}
+
+	public void setMembersNo(int membersNo) {
+		MembersNo = membersNo;
+	}
+	
+	public String getMembersName() {
+		return MembersName;
+	}
+
+	public void setMembersName(String membersName) {
+		MembersName = membersName;
 	}
 }

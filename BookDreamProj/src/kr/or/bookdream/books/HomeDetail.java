@@ -210,7 +210,7 @@ public class HomeDetail extends JPanel {
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// HomeDetailAdd 패널 호출
-				mMainView.setDetailPanel(new HomeDetailAdd());
+				mMainView.setDetailPanel(new HomeDetailAdd(mMainView));
 			}
 		});
 		btn_add.setBounds(180, 463, 97, 23);

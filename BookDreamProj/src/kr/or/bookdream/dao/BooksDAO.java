@@ -104,11 +104,24 @@ public class BooksDAO {
 		return vbooks;
 	}
 	
-	public boolean setBooksAdd(Vector<Books> vbooks, int membersno){
-		membersno = 1;
+	public boolean setBooksAdd(
+			String title, 
+			String isbn, 
+			String author, 
+			String publisher, 
+			String pdate, 
+			int edition,
+			String status,
+			String link, 
+			int rpoint, 
+			int members_no, 
+			int category1_no, 
+			int category2_no){
+		
 		boolean bresult = false;
 		ConnectionPool pool = null;
 		Connection conn = null;
+		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
@@ -118,26 +131,29 @@ public class BooksDAO {
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement("insert into books(title,isbn,author,publisher,pdate,edition,status, link,registdate,rpoint,members_no, category1_no, category2_no) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
-			pstmt.setString(1, vbooks.get(0).getTitle() );	
-			pstmt.setString(2, vbooks.get(0).getIsbn() );	
-			pstmt.setString(3, vbooks.get(0).getAuthor() );	
-			pstmt.setString(4, vbooks.get(0).getPublisher() );	
-			pstmt.setString(5, vbooks.get(0).getPdate() );	
-			pstmt.setInt(6, vbooks.get(0).getEdition() );	
-			pstmt.setString(7, vbooks.get(0).getStatus() );	
-			pstmt.setString(8, vbooks.get(0).getLink() );	
+			pstmt.setString(1, title );	
+			pstmt.setString(2, isbn );	
+			pstmt.setString(3, author );	
+			pstmt.setString(4, publisher );	
+			pstmt.setString(5, pdate );	
+			pstmt.setInt(6, edition );	
+			pstmt.setString(7, status );	
+			pstmt.setString(8, link );	
 			pstmt.setString(9, cu.getNowTime() );	
-			pstmt.setInt(10, vbooks.get(0).getRpoint() );	
-			pstmt.setInt(11, membersno );	
-			pstmt.setInt(12, vbooks.get(0).getCategory1_no() );	
-			pstmt.setInt(13, vbooks.get(0).getCategory2_no() );	
+			pstmt.setInt(10, rpoint );	
+			pstmt.setInt(11, members_no );	
+			pstmt.setInt(12, category1_no );	
+			pstmt.setInt(13, category2_no );	
 			bresult = pstmt.execute();	
 			
-			if(bresult){
-				pstmt2.getConnection().prepareStatement("insert into history(wdate,books_no, members_no) values(?,?,?)");
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select max(no) from books ");
+			System.out.println("maxrow:"+pstmt.getMaxRows());
+			{
+				pstmt2 = conn.prepareStatement("insert into history(wdate,books_no, members_no) values(?,?,?)");
 				pstmt2.setString(1, cu.getNowTime());
-				pstmt2.setInt(2, vbooks.get(0).getNo());
-				pstmt2.setInt(1, membersno);
+				pstmt2.setInt(2, rs.getInt(0));
+				pstmt2.setInt(3, members_no);
 				pstmt2.execute();
 			}
 		}catch(Exception err){
@@ -145,6 +161,10 @@ public class BooksDAO {
 		}finally {
 			if(pstmt2 != null)
 				try {pstmt2.close();} catch (SQLException e) {e.printStackTrace();}
+			if(rs != null)
+				try {rs.close();} catch (SQLException e) {e.printStackTrace();}
+			if(stmt != null)
+				try {stmt.close();} catch (SQLException e) {e.printStackTrace();}
 			if(pstmt != null)
 				try {pstmt.close();} catch (SQLException e) {e.printStackTrace();}
 			if(pool != null) pool.releaseConnection(conn);

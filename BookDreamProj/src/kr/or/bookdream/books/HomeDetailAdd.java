@@ -2,9 +2,16 @@ package kr.or.bookdream.books;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+
+import kr.or.bookdream.MainView;
+import kr.or.bookdream.dao.BooksDAO;
+import kr.or.bookdream.vo.Books;
+
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -15,20 +22,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class HomeDetailAdd extends JPanel {
+	private MainView mMainView;
 	private JTextField tf_title;
 	private JTextField tf_author;
 	private JTextField tf_isbn;
 	private JTextField tf_publisher;
 	private JTextField tf_pdate;
 	private JTextField tf_edition;
-	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField tf_link;
-
+	private JComboBox cb_status;
+	private JComboBox cb_rpoint;
+	
+	private int category1_no;
+	private int category2_no;
 	/**
 	 * Create the panel.
 	 */
-	public HomeDetailAdd() {
+	public HomeDetailAdd(MainView mMainView) {
+		this.mMainView = mMainView;
 		setForeground(Color.WHITE);
 		setLayout(null);
 		
@@ -114,11 +126,6 @@ public class HomeDetailAdd extends JPanel {
 		label_4.setBounds(12, 185, 57, 15);
 		panel_1.add(label_4);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(81, 182, 172, 21);
-		panel_1.add(textField_6);
-		
 		JLabel label_5 = new JLabel("\uC18C\uC720\uC790");
 		label_5.setHorizontalAlignment(SwingConstants.RIGHT);
 		label_5.setBounds(12, 213, 57, 15);
@@ -148,10 +155,10 @@ public class HomeDetailAdd extends JPanel {
 		btnNewButton.setBounds(180, 69, 73, 23);
 		panel_1.add(btnNewButton);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5"}));
-		comboBox.setBounds(81, 241, 172, 21);
-		panel_1.add(comboBox);
+		cb_rpoint = new JComboBox();
+		cb_rpoint.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5"}));
+		cb_rpoint.setBounds(81, 241, 172, 21);
+		panel_1.add(cb_rpoint);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(81, 272, 172, 21);
@@ -171,14 +178,45 @@ public class HomeDetailAdd extends JPanel {
 		tf_link.setBounds(81, 328, 172, 21);
 		panel_1.add(tf_link);
 		
+		cb_status = new JComboBox();
+		cb_status.setModel(new DefaultComboBoxModel(new String[] {"PRIVATE", "PUBLIC"}));
+		cb_status.setBounds(81, 182, 172, 21);
+		panel_1.add(cb_status);
+		
 		JButton btn_add = new JButton("\uB4F1\uB85D\uD558\uAE30");
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				addData();
 			}
 		});
 		btn_add.setBounds(180, 463, 97, 23);
 		add(btn_add);
+
+	}
+	
+	private void addData(){
+		BooksDAO booksdao = new BooksDAO();
+		boolean bresult = booksdao.setBooksAdd(
+				tf_title.getText(), 
+				tf_isbn.getText(), 
+				tf_author.getText(), 
+				tf_publisher.getText(), 
+				tf_pdate.getText(), 
+				Integer.parseInt(tf_edition.getText()), 
+				cb_status.getSelectedItem().toString(), 
+				tf_link.getText(), 
+				Integer.parseInt(cb_rpoint.getSelectedItem().toString()), 
+				mMainView.getMembersNo(), 
+				category1_no, 
+				category2_no
+		);
+		
+		if(bresult){
+			JOptionPane.showMessageDialog(null, "등록성공");
+		}else{
+			JOptionPane.showMessageDialog(null, "등록실패");
+		}
+		
 
 	}
 }

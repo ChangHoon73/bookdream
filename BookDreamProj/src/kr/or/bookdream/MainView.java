@@ -6,11 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import kr.or.bookdream.books.HomeDetail;
 import kr.or.bookdream.books.HomeMain;
+import kr.or.bookdream.login.Login;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,22 +34,30 @@ public class MainView {
 	
 	private int MembersNo = 1;
 	private String MembersName;
+//	private MainView window;
+	private Login dialog;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainView window = new MainView();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		new MainView().startMain();
 	}
-
+	
+	public void startMain(){
+//		window = new MainView();
+		dialog = new Login(this);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
+		
+	}
+	
+	public void StartMainView(){
+		try {
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Create the application.
 	 */

@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import kr.or.bookdream.MainView;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -14,28 +17,40 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JDialog {
 	private JTextField textField;
 	private JPasswordField passwordField;
-
+	private MainView mMainView;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			Login dialog = new Login();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			Login dialog = new Login();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public Login() {
+	public Login(MainView mMainView) {
+		setAlwaysOnTop(true);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				mMainView.StartMainView();
+			}
+		});
+		this.mMainView = mMainView;
 		setBounds(100, 100, 867, 661);
 		getContentPane().setLayout(null);
 		
@@ -53,6 +68,11 @@ public class Login extends JDialog {
 		getContentPane().add(panel);
 		
 		JButton button = new JButton("\uB3C4\uC11C \uAC80\uC0C9");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mMainView.StartMainView();
+			}
+		});
 		button.setFont(new Font("±¼¸²", Font.PLAIN, 20));
 		button.setBounds(50, 50, 400, 40);
 		panel.add(button);

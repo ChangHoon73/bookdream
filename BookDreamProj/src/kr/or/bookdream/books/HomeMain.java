@@ -72,11 +72,11 @@ public class HomeMain extends JPanel{
 		BooksDAO booksdao = new BooksDAO();
 		vbooks = booksdao.getBooksListAll();
 		
-		vcat1name.add("선택하세요");
-		vcat2name.add("선택하세요");
-		vsido.add("선택하세요");
-		vgugun.add("선택하세요");
-		vdong.add("선택하세요");
+		vcat1name.add("카테고리1");
+		vcat2name.add("카테고리2");
+		vsido.add("시도선택");
+		vgugun.add("구군선택");
+		vdong.add("동선택");
 		
 		Cat1DAO cat1dao = new Cat1DAO();
 		vcat1 = cat1dao.getCat1ListAll();

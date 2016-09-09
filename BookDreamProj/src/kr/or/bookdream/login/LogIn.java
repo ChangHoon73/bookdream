@@ -56,7 +56,7 @@ public class LogIn {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(UIManager.getColor("Button.light"));
+		panel.setBackground(new Color(51, 204, 153));
 		panel.setForeground(SystemColor.control);
 		panel.setBounds(255, 130, 500, 400);
 		frame.getContentPane().add(panel);

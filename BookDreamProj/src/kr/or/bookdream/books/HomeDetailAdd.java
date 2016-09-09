@@ -10,7 +10,11 @@ import javax.swing.SwingConstants;
 
 import kr.or.bookdream.MainView;
 import kr.or.bookdream.dao.BooksDAO;
+import kr.or.bookdream.dao.Cat1DAO;
+import kr.or.bookdream.dao.Cat2DAO;
 import kr.or.bookdream.vo.Books;
+import kr.or.bookdream.vo.Category1;
+import kr.or.bookdream.vo.Category2;
 
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
@@ -19,6 +23,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class HomeDetailAdd extends JPanel {
@@ -36,6 +43,13 @@ public class HomeDetailAdd extends JPanel {
 	private int category1_no;
 	private int category2_no;
 	private JComboBox cb_edition;
+	
+	private Vector<Category1> vcat1;
+	private Vector<Category2> vcat2;
+	private Vector<String> vcat1name;
+	private Vector<String> vcat2name;
+	private JComboBox cb_cat1;
+	private JComboBox cb_cat2;
 	/**
 	 * Create the panel.
 	 */
@@ -43,6 +57,21 @@ public class HomeDetailAdd extends JPanel {
 		this.mMainView = mMainView;
 		setForeground(Color.WHITE);
 		setLayout(null);
+		
+		vcat1 = new Vector<Category1>();
+		vcat2 = new Vector<Category2>();
+		vcat1name = new Vector<String>();
+		vcat2name = new Vector<String>();
+		
+	
+		vcat1name.add("카테고리1");
+		vcat2name.add("카테고리2");
+		
+		Cat1DAO cat1dao = new Cat1DAO();
+		vcat1 = cat1dao.getCat1ListAll();
+		for(int i = 0; i< vcat1.size(); i++){
+			vcat1name.add(vcat1.get(i).getName());
+		}
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLACK);
@@ -155,13 +184,43 @@ public class HomeDetailAdd extends JPanel {
 		cb_rpoint.setBounds(81, 241, 172, 21);
 		panel_1.add(cb_rpoint);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(81, 272, 172, 21);
-		panel_1.add(comboBox_1);
+		cb_cat1 = new JComboBox(vcat1name);
+		cb_cat1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+//				cb_cat2.removeAllItems();
+//				vcat2name.clear();
+//				cb_cat2.removeAll();
+				if( e.getStateChange() == ItemEvent.SELECTED && cb_cat1.getSelectedIndex() > 0 ) {
+					cb_cat2.removeAll();
+					System.out.println(cb_cat1.getSelectedIndex());
+					Cat2DAO cat2dao = new Cat2DAO();
+					int indx = cb_cat1.getSelectedIndex()-1;
+					category1_no = vcat1.get(indx).getNo();
+					vcat2 = cat2dao.getCat2ListAll(vcat1.get(indx).getNo());
+					for(int i = 0; i< vcat2.size(); i++){
+						cb_cat2.addItem(vcat2.get(i).getName());
+					}
+					if(cb_cat2.getItemCount() > 0)
+						cb_cat2.setSelectedIndex(0);
+				}
+				
+				
+			}
+		});
+		cb_cat1.setBounds(81, 272, 172, 21);
+		panel_1.add(cb_cat1);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(81, 300, 172, 21);
-		panel_1.add(comboBox_2);
+		cb_cat2 = new JComboBox(vcat2name);
+		cb_cat2.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if( e.getStateChange() == ItemEvent.SELECTED && cb_cat1.getSelectedIndex() > 0 ) {
+					int indx = cb_cat2.getSelectedIndex()-1;
+					category2_no = vcat2.get(indx).getNo();
+				}
+			}
+		});
+		cb_cat2.setBounds(81, 300, 172, 21);
+		panel_1.add(cb_cat2);
 		
 		JLabel label_6 = new JLabel("\uCC45\uC774\uBBF8\uC9C0");
 		label_6.setHorizontalAlignment(SwingConstants.RIGHT);

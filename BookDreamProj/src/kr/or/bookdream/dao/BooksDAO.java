@@ -54,6 +54,11 @@ public class BooksDAO {
 		return vbooks;
 	}
 	
+	/**
+	 * 책의 pk값을 받아 내용을 불러오는 함수
+	 * @param booksno
+	 * @return Vector<Books>
+	 */
 	public Vector<Books> getBooksSelectId(int booksno){
 		Vector<Books> vbooks = new Vector<Books>();
 		ConnectionPool pool = null;

@@ -34,6 +34,7 @@ import java.awt.event.MouseEvent;
 
 public class HomeMain extends JPanel{
 	private MainView mMainView; 
+	
 	private JComboBox cb_cat1;
 	private JComboBox cb_cat2;
 	private JComboBox cb_sido;
@@ -210,10 +211,13 @@ public class HomeMain extends JPanel{
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// 마우스클릭해서 인덱스를 뽑고
 				int seletedIndex = table.getSelectedRow();
+				// 북스의 pk  no를 추출
 				int booksno = (int) table.getValueAt(seletedIndex, 0);
-				HomeDetail homeDetail = new HomeDetail(mMainView, booksno);
-				mMainView.setDetailPanel(homeDetail);
+				// mMainView는 추가버튼호출시 사용
+				HomeDetail homeDetail = new HomeDetail(mMainView, booksno); 
+				mMainView.setDetailPanel(homeDetail);// 추가
 				System.out.println(booksno);
 				
 			}

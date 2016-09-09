@@ -46,8 +46,7 @@ public class HomeDetailAdd extends JPanel {
 	
 	private Vector<Category1> vcat1;
 	private Vector<Category2> vcat2;
-	private Vector<String> vcat1name;
-	private Vector<String> vcat2name;
+
 	private JComboBox cb_cat1;
 	private JComboBox cb_cat2;
 	/**
@@ -60,18 +59,6 @@ public class HomeDetailAdd extends JPanel {
 		
 		vcat1 = new Vector<Category1>();
 		vcat2 = new Vector<Category2>();
-		vcat1name = new Vector<String>();
-		vcat2name = new Vector<String>();
-		
-	
-		vcat1name.add("카테고리1");
-		vcat2name.add("카테고리2");
-		
-		Cat1DAO cat1dao = new Cat1DAO();
-		vcat1 = cat1dao.getCat1ListAll();
-		for(int i = 0; i< vcat1.size(); i++){
-			vcat1name.add(vcat1.get(i).getName());
-		}
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLACK);
@@ -184,24 +171,25 @@ public class HomeDetailAdd extends JPanel {
 		cb_rpoint.setBounds(81, 241, 172, 21);
 		panel_1.add(cb_rpoint);
 		
-		cb_cat1 = new JComboBox(vcat1name);
+		cb_cat1 = new JComboBox();
 		cb_cat1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 //				cb_cat2.removeAllItems();
 //				vcat2name.clear();
 //				cb_cat2.removeAll();
 				if( e.getStateChange() == ItemEvent.SELECTED && cb_cat1.getSelectedIndex() > 0 ) {
-					cb_cat2.removeAll();
-					System.out.println(cb_cat1.getSelectedIndex());
+					cb_cat2.removeAllItems();
+					cb_cat2.addItem("카테고리2");
+					//System.out.println(cb_cat1.getSelectedIndex());
 					Cat2DAO cat2dao = new Cat2DAO();
-					int indx = cb_cat1.getSelectedIndex()-1;
-					category1_no = vcat1.get(indx).getNo();
-					vcat2 = cat2dao.getCat2ListAll(vcat1.get(indx).getNo());
+					int indx = cb_cat1.getSelectedIndex();
+					category1_no = vcat1.get(indx-1).getNo();
+					vcat2 = cat2dao.getCat2ListAll(category1_no);
 					for(int i = 0; i< vcat2.size(); i++){
 						cb_cat2.addItem(vcat2.get(i).getName());
 					}
-					if(cb_cat2.getItemCount() > 0)
-						cb_cat2.setSelectedIndex(0);
+//					if(cb_cat2.getItemCount() > 0)
+//						cb_cat2.setSelectedIndex(0);
 				}
 				
 				
@@ -210,16 +198,26 @@ public class HomeDetailAdd extends JPanel {
 		cb_cat1.setBounds(81, 272, 172, 21);
 		panel_1.add(cb_cat1);
 		
-		cb_cat2 = new JComboBox(vcat2name);
+		cb_cat1.addItem("카테고리1");
+		
+		
+		Cat1DAO cat1dao = new Cat1DAO();
+		vcat1 = cat1dao.getCat1ListAll();
+		for(int i = 0; i< vcat1.size(); i++){
+			cb_cat1.addItem(vcat1.get(i).getName());
+		}
+		
+		cb_cat2 = new JComboBox();
 		cb_cat2.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				if( e.getStateChange() == ItemEvent.SELECTED && cb_cat1.getSelectedIndex() > 0 ) {
-					int indx = cb_cat2.getSelectedIndex()-1;
+				if( e.getStateChange() == ItemEvent.SELECTED && cb_cat2.getSelectedIndex() > 0 ) {
+					int indx = cb_cat2.getSelectedIndex();
 					category2_no = vcat2.get(indx).getNo();
 				}
 			}
 		});
 		cb_cat2.setBounds(81, 300, 172, 21);
+		cb_cat2.addItem("카테고리2");
 		panel_1.add(cb_cat2);
 		
 		JLabel label_6 = new JLabel("\uCC45\uC774\uBBF8\uC9C0");

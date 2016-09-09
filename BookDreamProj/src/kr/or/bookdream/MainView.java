@@ -23,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainView {
 
@@ -36,8 +38,14 @@ public class MainView {
 	private JScrollPane detailScrollPane;
 	private JPanel categoryPanel;
 	
-	private int MembersNo = 1;
+	private int MembersNo = 0;
 	private String MembersName;
+	private String MembersEmail;
+	
+
+	private boolean bLogin;
+	
+	
 //	private MainView window;
 	private Login dialog;
 	
@@ -45,6 +53,8 @@ public class MainView {
 	private static final int MY = 1;
 	private static final int HISTORY = 2;
 	private static final int CATEGORY = 3;
+	private JPanel loginPanel;
+	private JPanel logoutPanel;
 	/**
 	 * Launch the application.
 	 */
@@ -118,6 +128,7 @@ public class MainView {
 		
 		historyPanel = new JPanel();
 		tabbedPane.addTab("HISTORY", null, historyPanel, null);
+		tabbedPane.setEnabledAt(2, false);
 		historyPanel.setLayout(new BorderLayout());
 		historyPanel.add(new HistoryMain(this)); // HomeMain에 MainView객체 전달
 		
@@ -134,13 +145,47 @@ public class MainView {
 		detailPanel.add(new HomeDetail(this)); // 기본적으로 HomeDetail을 표시
 		detailScrollPane.setViewportView(detailPanel);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(899, 10, 97, 23);
-		frame.getContentPane().add(btnNewButton);
+		loginPanel = new JPanel();
+		loginPanel.setBounds(711, 10, 285, 28);
+		frame.getContentPane().add(loginPanel);
+		loginPanel.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(790, 10, 97, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		//회원 로그아웃
+		JButton btnLogout = new JButton("\uB85C\uADF8\uC544\uC6C3");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnLogout.setBounds(67, 4, 97, 23);
+		loginPanel.add(btnLogout);
+		
+		// 회원정보수정
+		JButton btnMemberInfo = new JButton("\uD68C\uC6D0\uC815\uBCF4");
+		btnMemberInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnMemberInfo.setBounds(176, 4, 97, 23);
+		loginPanel.add(btnMemberInfo);
+		
+		loginPanel.setVisible(false);
+		logoutPanel = new JPanel();
+		logoutPanel.setBounds(711, 10, 285, 28);
+		frame.getContentPane().add(logoutPanel);
+		logoutPanel.setLayout(null);
+		
+	
+		// 회원로그인
+		JButton btnLogin = new JButton("\uB85C\uADF8\uC778");
+		btnLogin.setBounds(176, 4, 97, 23);
+		logoutPanel.add(btnLogin);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 	
 	public void setDetailPanel(JPanel pDetail){
@@ -163,5 +208,28 @@ public class MainView {
 
 	public void setMembersName(String membersName) {
 		MembersName = membersName;
+	}
+	
+	public String getMembersEmail() {
+		return MembersEmail;
+	}
+
+	public void setMembersEmail(String membersEmail) {
+		MembersEmail = membersEmail;
+	}
+
+	public boolean isbLogin() {
+		return bLogin;
+	}
+
+	public void setbLogin(boolean bLogin) {
+		this.bLogin = bLogin;
+	}
+	
+	public void LoginCheck(){
+		tabbedPane.setEnabledAt(1, bLogin);
+		tabbedPane.setEnabledAt(2, bLogin);
+		loginPanel.setVisible(bLogin);
+		logoutPanel.setVisible(!bLogin);
 	}
 }

@@ -9,8 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.bookdream.MainView;
+import kr.or.bookdream.dao.LoginDAO;
+import kr.or.bookdream.vo.Logins;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -19,13 +23,14 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Vector;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Login extends JDialog {
-	private JTextField textField;
 	private JPasswordField passwordField;
 	private MainView mMainView;
+	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -85,6 +90,25 @@ public class Login extends JDialog {
 		panel.add(textField);
 		
 		JButton button_1 = new JButton("\uB85C\uADF8\uC778");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoginDAO logindao = new LoginDAO();
+				boolean bSuccess = logindao.loginUser( textField.getText(), passwordField.getText());
+				if(bSuccess){
+					JOptionPane.showMessageDialog(null, "로그인성공");
+					Vector<Logins> vc = logindao.getLoginInfo(textField.getText(), true);
+					mMainView.setMembersNo(vc.get(0).getMembersno());
+					mMainView.setMembersEmail(vc.get(0).getMembersemail());
+					mMainView.setMembersName(vc.get(0).getMembersname());
+					mMainView.setbLogin(vc.get(0).isbLogin());
+					
+					mMainView.LoginCheck();
+					
+				}else{
+					JOptionPane.showMessageDialog(null, "로그인실패");
+				}
+			}
+		});
 		button_1.setFont(new Font("굴림", Font.PLAIN, 20));
 		button_1.setBounds(50, 260, 400, 40);
 		panel.add(button_1);

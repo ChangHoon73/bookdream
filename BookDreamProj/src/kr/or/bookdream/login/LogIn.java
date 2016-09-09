@@ -100,7 +100,7 @@ public class LogIn {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.setBounds(410, 322, 40, 40);
+		btnNewButton_2.setBounds(410, 330, 40, 40);
 		panel.add(btnNewButton_2);
 		
 		JLabel lblNewLabel = new JLabel("BookDream");
@@ -115,7 +115,7 @@ public class LogIn {
 			}
 		});
 		btnNewButton_3.setFont(new Font("±¼¸²", Font.PLAIN, 15));
-		btnNewButton_3.setBounds(464, 558, 100, 40);
+		btnNewButton_3.setBounds(460, 560, 100, 40);
 		frame.getContentPane().add(btnNewButton_3);
 	}
 

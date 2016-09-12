@@ -73,11 +73,12 @@ public class Login extends JDialog {
 		panel.setBounds(164, 113, 500, 400);
 		getContentPane().add(panel);
 		
+		//도서검색버튼
 		JButton button = new JButton("\uB3C4\uC11C \uAC80\uC0C9");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Login.this.dispose();
-				mMainView.StartMainView();
+				Login.this.dispose(); // 로그인창닫기
+				mMainView.StartMainView(); // 메인뷰 보이게
 			}
 		});
 		button.setFont(new Font("굴림", Font.PLAIN, 20));
@@ -91,6 +92,7 @@ public class Login extends JDialog {
 		textField.setBounds(50, 120, 400, 40);
 		panel.add(textField);
 		
+		//로그인버튼
 		JButton button_1 = new JButton("\uB85C\uADF8\uC778");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,7 +106,7 @@ public class Login extends JDialog {
 					mMainView.setMembersName(vc.get(0).getMembersname());
 					mMainView.setbLogin(vc.get(0).isbLogin());
 					
-					mMainView.LoginCheck();
+//					mMainView.LoginCheck();
 					Login.this.dispose();
 					mMainView.StartMainView();
 				}else{
@@ -137,7 +139,18 @@ public class Login extends JDialog {
 		
 		JButton button_3 = new JButton("\uD68C\uC6D0\uAC00\uC785");
 		button_3.setFont(new Font("굴림", Font.PLAIN, 15));
-		button_3.setBounds(369, 543, 100, 40);
+		button_3.setBounds(291, 543, 100, 40);
 		getContentPane().add(button_3);
+		
+		JButton btnExit = new JButton("\uC885\uB8CC");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//프로그램종료
+				System.exit(0);
+			}
+		});
+		btnExit.setFont(new Font("굴림", Font.PLAIN, 15));
+		btnExit.setBounds(447, 543, 100, 40);
+		getContentPane().add(btnExit);
 	}
 }

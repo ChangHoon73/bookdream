@@ -11,6 +11,9 @@ import kr.or.bookdream.vo.Category1;
 import kr.or.bookdream.vo.Logins;
 
 public class LoginDAO {
+	/**
+	 * 사용자 로그인 체크 함수
+	 */
 	public boolean loginUser(String userid, String userpw){
 		boolean bloginSuccess = false;
 		ConnectionPool pool = null;

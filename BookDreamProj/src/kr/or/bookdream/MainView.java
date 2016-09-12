@@ -43,7 +43,7 @@ public class MainView {
 	private String MembersEmail;
 	
 
-	private boolean bLogin;
+	private boolean bLogin; // 로그인체크변수 true면 로그인, false 로그아웃
 	
 	
 //	private MainView window;
@@ -64,12 +64,14 @@ public class MainView {
 	
 	public void startMain(){
 //		window = new MainView();
-		dialog = new Login(this);
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
+//		dialog = new Login(this);
+//		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//		dialog.setVisible(true);
+		startloginForm();
 		
 	}
 	
+	// 메인뷰화면 보이기
 	public void StartMainView(){
 		try {
 			frame.setVisible(true);
@@ -154,7 +156,8 @@ public class MainView {
 		JButton btnLogout = new JButton("\uB85C\uADF8\uC544\uC6C3");
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				setbLogin(false);
+				startloginForm();
 			}
 		});
 		btnLogout.setBounds(67, 4, 97, 23);
@@ -183,10 +186,21 @@ public class MainView {
 		logoutPanel.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				startloginForm();
 			}
 		});
 	}
+	
+	/**
+	 * 로그인폼
+	 */
+	public void startloginForm(){
+		dialog = new Login(MainView.this);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
+		MainView.this.frame.setVisible(false);
+	}
+	
 	
 	public void setDetailPanel(JPanel pDetail){
 		this.detailPanel.removeAll(); // 기존DetailPanel내용 삭제
@@ -224,8 +238,10 @@ public class MainView {
 
 	public void setbLogin(boolean bLogin) {
 		this.bLogin = bLogin;
+		LoginCheck();
 	}
 	
+	//로그인시 보이기
 	public void LoginCheck(){
 		tabbedPane.setEnabledAt(1, bLogin);
 		tabbedPane.setEnabledAt(2, bLogin);

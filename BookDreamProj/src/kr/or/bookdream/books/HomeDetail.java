@@ -2,6 +2,8 @@ package kr.or.bookdream.books;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -48,6 +50,9 @@ public class HomeDetail extends JPanel {
 	private JLabel lbl_image;
 	private JPanel imgPanel;
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public HomeDetail(MainView mMainView){
 		this.mMainView = mMainView;
 		initialize(); //  추가
@@ -209,8 +214,16 @@ public class HomeDetail extends JPanel {
 		JButton btn_add = new JButton("\uCC45\uB4F1\uB85D");
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// HomeDetailAdd 패널 호출
-				mMainView.setDetailPanel(new HomeDetailAdd(mMainView));
+				if(mMainView.isbLogin()){ // 로그인시
+					// HomeDetailAdd 패널 호출
+					mMainView.setDetailPanel(new HomeDetailAdd(mMainView));
+				}else{ // 비로그인시
+					int result = JOptionPane.showConfirmDialog(null, "로그인후 사용이 가능합니다. \n로그인하시겠습니까?");
+					if(result == 0){
+						mMainView.startloginForm();
+					}
+				}
+				
 			}
 		});
 		btn_add.setBounds(180, 463, 97, 23);

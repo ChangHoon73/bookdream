@@ -48,11 +48,12 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login(MainView mMainView) {
-		setAlwaysOnTop(true);
+//		setAlwaysOnTop(true);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				mMainView.StartMainView();
+//				mMainView.StartMainView();
+				System.exit(0);// 시스템종료
 			}
 		});
 		this.mMainView = mMainView;
@@ -75,6 +76,7 @@ public class Login extends JDialog {
 		JButton button = new JButton("\uB3C4\uC11C \uAC80\uC0C9");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Login.this.dispose();
 				mMainView.StartMainView();
 			}
 		});
@@ -103,7 +105,8 @@ public class Login extends JDialog {
 					mMainView.setbLogin(vc.get(0).isbLogin());
 					
 					mMainView.LoginCheck();
-					
+					Login.this.dispose();
+					mMainView.StartMainView();
 				}else{
 					JOptionPane.showMessageDialog(null, "로그인실패");
 				}

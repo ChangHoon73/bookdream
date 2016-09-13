@@ -201,6 +201,11 @@ public class MainView {
 		MainView.this.frame.setVisible(false);
 	}
 	
+	public void setHomeMain(){
+		homePanel.removeAll();
+		homePanel.add(new HomeMain(this)); // HomeMain에 MainView객체 전달
+		homePanel.updateUI();
+	}
 	
 	public void setDetailPanel(JPanel pDetail){
 		this.detailPanel.removeAll(); // 기존DetailPanel내용 삭제

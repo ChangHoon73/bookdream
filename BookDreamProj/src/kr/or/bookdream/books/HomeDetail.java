@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 
 import kr.or.bookdream.MainView;
 import kr.or.bookdream.dao.BooksDAO;
+import kr.or.bookdream.util.CommonUtil;
 import kr.or.bookdream.vo.Books;
 
 import javax.swing.JTextField;
@@ -77,7 +78,7 @@ public class HomeDetail extends JPanel {
 		lbl_registdate.setText(vbooks.get(0).getRegidate());
 		lbl_rpoint.setText(""+vbooks.get(0).getRpoint());
 		//lbl_title.setText(vbooks.get(0).getTitle());
-		getLinksImg(vbooks.get(0).getLink());
+		lbl_image.setIcon(CommonUtil.getLinksImg(vbooks.get(0).getLink(), imgPanel.getWidth(), imgPanel.getHeight() ));
 	}
 	
 	private void initialize() {
@@ -231,35 +232,5 @@ public class HomeDetail extends JPanel {
 		
 	}
 	
-	/**
-	 * 이미지 링크주소를 받아서 이미지를 뽑아서 이미지 라벨에 적용 함수
-	 * @param linkurl
-	 */
-	private void getLinksImg(String linkurl){
-		URL url = null;
-		try {
-			url = new URL(linkurl);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(url);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// 이미지를 사이즈에 맞게 축소
-		ImageIcon imgscale = new ImageIcon(img);
-		Image image = imgscale.getImage().getScaledInstance(
-				imgPanel.getWidth(), // 가로크기
-				imgPanel.getHeight(), // 세로크기
-				Image.SCALE_DEFAULT);
-		ImageIcon imgIcon = new ImageIcon(
-				image
-				);
-		lbl_image.setIcon(imgIcon);
-		
-	}
+	
 }

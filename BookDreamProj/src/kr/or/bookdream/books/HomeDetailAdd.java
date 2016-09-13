@@ -12,9 +12,11 @@ import kr.or.bookdream.MainView;
 import kr.or.bookdream.dao.BooksDAO;
 import kr.or.bookdream.dao.Cat1DAO;
 import kr.or.bookdream.dao.Cat2DAO;
+import kr.or.bookdream.util.CommonUtil;
 import kr.or.bookdream.vo.Books;
 import kr.or.bookdream.vo.Category1;
 import kr.or.bookdream.vo.Category2;
+import kr.or.bookdream.vo.SearchBooks;
 
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
@@ -49,6 +51,8 @@ public class HomeDetailAdd extends JPanel {
 
 	private JComboBox cb_cat1;
 	private JComboBox cb_cat2;
+	private JLabel lbl_Image;
+	private JPanel imgPanel;
 	/**
 	 * Create the panel.
 	 */
@@ -60,17 +64,17 @@ public class HomeDetailAdd extends JPanel {
 		vcat1 = new Vector<Category1>();
 		vcat2 = new Vector<Category2>();
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setBounds(23, 34, 112, 152);
-		add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		imgPanel = new JPanel();
+		imgPanel.setBackground(Color.BLACK);
+		imgPanel.setBounds(23, 34, 112, 152);
+		add(imgPanel);
+		imgPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("");
-		panel.add(lblNewLabel, BorderLayout.NORTH);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(HomeDetailAdd.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
-		lblNewLabel.setBackground(Color.BLACK);
+		lbl_Image = new JLabel("");
+		imgPanel.add(lbl_Image, BorderLayout.NORTH);
+		lbl_Image.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_Image.setIcon(new ImageIcon(HomeDetailAdd.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
+		lbl_Image.setBackground(Color.BLACK);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(147, 31, 276, 371);
@@ -163,6 +167,18 @@ public class HomeDetailAdd extends JPanel {
 		panel_1.add(label_9);
 		
 		JButton btnNewButton = new JButton("\uAC80\uC0C9");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CommonUtil commutil = new CommonUtil();
+				Vector<SearchBooks> vSearchBooks = commutil.getSearchBooks(tf_isbn.getText());
+				tf_author.setText(vSearchBooks.get(0).getAuthor());
+				tf_title.setText(vSearchBooks.get(0).getTitle());
+				tf_link.setText(vSearchBooks.get(0).getLink());
+				tf_pdate.setText(vSearchBooks.get(0).getPdate());
+				tf_publisher.setText(vSearchBooks.get(0).getPublisher());
+				lbl_Image.setIcon(CommonUtil.getLinksImg(vSearchBooks.get(0).getLink(), imgPanel.getWidth(), imgPanel.getHeight()));
+			}
+		});
 		btnNewButton.setBounds(180, 69, 73, 23);
 		panel_1.add(btnNewButton);
 		
@@ -270,6 +286,7 @@ public class HomeDetailAdd extends JPanel {
 		
 		if(bresult){
 			JOptionPane.showMessageDialog(null, "등록성공");
+			mMainView.setHomeMain();
 		}else{
 			JOptionPane.showMessageDialog(null, "등록실패");
 		}

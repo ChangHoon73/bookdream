@@ -166,11 +166,12 @@ public class HomeDetailAdd extends JPanel {
 		label_9.setBounds(12, 303, 57, 15);
 		panel_1.add(label_9);
 		
+		// isbn검색버튼
 		JButton btnNewButton = new JButton("\uAC80\uC0C9");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CommonUtil commutil = new CommonUtil();
-				Vector<SearchBooks> vSearchBooks = commutil.getSearchBooks(tf_isbn.getText());
+				
+				Vector<SearchBooks> vSearchBooks = CommonUtil.getSearchBooks(tf_isbn.getText());
 				tf_author.setText(vSearchBooks.get(0).getAuthor());
 				tf_title.setText(vSearchBooks.get(0).getTitle());
 				tf_link.setText(vSearchBooks.get(0).getLink());

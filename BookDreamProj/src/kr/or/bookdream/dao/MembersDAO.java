@@ -9,22 +9,22 @@ import java.util.Vector;
 
 import kr.or.bookdream.db.ConnectionPool;
 import kr.or.bookdream.util.CommonUtil;
+import kr.or.bookdream.vo.Books;
+import kr.or.bookdream.vo.History;
 import kr.or.bookdream.vo.Members;
 
 public class MembersDAO {
-	public Vector<Members> getMembersListAll(){
-		
+	public Vector<Members> getMembersListAll(String get_email){
 		Vector<Members> vmembers = new Vector<Members>();
 		ConnectionPool pool = null;
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
 		try{
 			pool = ConnectionPool.getInstance();
 			conn = pool.getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select * from members ");
+			rs = stmt.executeQuery("SELECT * FROM members WHERE email = '" + get_email + "'");
 			while(rs.next()){
 				vmembers.add(new Members(
 						rs.getInt("no"), 
@@ -37,7 +37,7 @@ public class MembersDAO {
 						rs.getString("dong"),
 						rs.getString("registdate"),
 						rs.getString("authdate"),
-						rs.getInt("sticker")	
+						rs.getInt("sticker")
 						));
 			}
 			
@@ -54,11 +54,6 @@ public class MembersDAO {
 		return vmembers;
 	}
 	
-	/**
-	 * members의 pk값을 받아 내용을 불러오는 함수
-	 * @param booksno
-	 * @return Vector<Books>
-	 */
 	public Vector<Members> getMembersSelectId(int memberno){
 		
 		Vector<Members> vmembers = new Vector<Members>();
@@ -102,33 +97,36 @@ public class MembersDAO {
 		
 		return vmembers;
 	}
+
 	
-	public boolean setMembersAdd(
-			 String email,
-			 String pw,
-			 String name,
-			 String tel,
-			 String sido,
-			 String gugun,
-			 String dong,
-			 String registdate,
-			 String authdate,
-			 int sticker){
-		
+	
+	public boolean setMembersAdd(String email,
+							     String pw,
+							     String name,
+							     String tel,
+							     String sido,
+							     String gugun,
+							     String dong,
+							     String registdate,
+							     String authdate,
+							     int    sticker)
+	{
 		boolean add_result = false;
-		
+	
 		ConnectionPool pool = null;
 		Connection conn = null;
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		CommonUtil cu = new CommonUtil();
 		
+		CommonUtil cu = new CommonUtil();
+
 		try{
 			pool = ConnectionPool.getInstance();
 			conn = pool.getConnection();
+
 			pstmt = conn.prepareStatement("insert into members(email,pw,name,tel,sido,gugun,dong,registdate,authdate,sticker) values(?,?,?,?,?,?,?,?,?,?)");
-					
+			
 			pstmt.setString(1, email);	
 			pstmt.setString(2, pw);	
 			pstmt.setString(3, name );	
@@ -143,7 +141,7 @@ public class MembersDAO {
 			pstmt.execute();	
 			add_result = true;
 			System.out.println("[MembersDAO][setMembersAdd] member data INSERT "+add_result);
-			
+				
 		}catch(Exception err){
 			System.err.println(err.toString());
 		}finally {
@@ -151,11 +149,102 @@ public class MembersDAO {
 				try {rs.close();} catch (SQLException e) {e.printStackTrace();}
 			if(stmt != null)
 				try {stmt.close();} catch (SQLException e) {e.printStackTrace();}
-			if(pstmt != null)
-				try {pstmt.close();} catch (SQLException e) {e.printStackTrace();}
 			if(pool != null) pool.releaseConnection(conn);
 		}
 		
 		return add_result;
 	}
+	
+	
+	public boolean setMembersUpdate(int no,
+									String email,
+									String pw,
+									String name,
+									String tel,
+									String sido,
+									String gugun,
+									String dong,
+									String registdate,
+									String authdate,
+									int    sticker)
+	{
+		boolean update_result = false;
+
+		ConnectionPool pool = null;
+		Connection conn = null;
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		CommonUtil cu = new CommonUtil();
+
+		try{
+		pool = ConnectionPool.getInstance();
+		conn = pool.getConnection();
+
+		pstmt = conn.prepareStatement("update members set email = ?,pw = ?,name = ?,tel = ?,sido = ?,gugun = ?,dong = ?,registdate = ?,authdate = ?,sticker = ? where no = " + no );
+
+		pstmt.setString(1, email);	
+		pstmt.setString(2, pw);	
+		pstmt.setString(3, name );	
+		pstmt.setString(4, tel );	
+		pstmt.setString(5, sido );	
+		pstmt.setString(6, gugun );	
+		pstmt.setString(7, dong );	
+		pstmt.setString(8, cu.getNowDate());	
+		pstmt.setString(9, cu.getNowDate() );	
+		pstmt.setInt(10, sticker );
+
+		pstmt.execute();	
+		update_result = true;
+		System.out.println("[MembersDAO][setMembersUpdate] member data Update "+update_result);
+
+		}catch(Exception err){
+		System.err.println(err.toString());
+		}finally {
+		if(rs != null)
+		try {rs.close();} catch (SQLException e) {e.printStackTrace();}
+		if(stmt != null)
+		try {stmt.close();} catch (SQLException e) {e.printStackTrace();}
+		if(pool != null) pool.releaseConnection(conn);
+		}
+
+		return update_result;
+	}
+	
+	public boolean setMembersDelete(int no)
+	{
+		boolean delete_result = false;
+
+		ConnectionPool pool = null;
+		Connection conn = null;
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		CommonUtil cu = new CommonUtil();
+
+		try{
+		pool = ConnectionPool.getInstance();
+		conn = pool.getConnection();
+
+		pstmt = conn.prepareStatement("delete from members where no = " + no );
+
+		pstmt.execute();	
+		delete_result = true;
+
+		}catch(Exception err){
+		System.err.println(err.toString());
+		}finally {
+		if(rs != null)
+		try {rs.close();} catch (SQLException e) {e.printStackTrace();}
+		if(stmt != null)
+		try {stmt.close();} catch (SQLException e) {e.printStackTrace();}
+		if(pool != null) pool.releaseConnection(conn);
+	}
+
+return delete_result;
+}
+
+	
 }

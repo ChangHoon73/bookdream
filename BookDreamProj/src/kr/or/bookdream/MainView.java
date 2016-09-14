@@ -15,6 +15,8 @@ import kr.or.bookdream.books.HomeMain;
 import kr.or.bookdream.history.HistoryDetail;
 import kr.or.bookdream.history.HistoryMain;
 import kr.or.bookdream.login.Login;
+import kr.or.bookdream.my.MyDetail;
+import kr.or.bookdream.my.MyMain;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -55,6 +57,11 @@ public class MainView {
 	private static final int CATEGORY = 3;
 	private JPanel loginPanel;
 	private JPanel logoutPanel;
+	
+	private int homeBooksno = 0;
+	private int myBooksno = 0;
+
+	
 	/**
 	 * Launch the application.
 	 */
@@ -100,9 +107,16 @@ public class MainView {
 			public void stateChanged(ChangeEvent e) {
 				switch(	tabbedPane.getSelectedIndex()){
 				case HOME:
-					setDetailPanel(new HomeDetail(MainView.this));
+					if(homeBooksno > 0 )
+						setDetailPanel(new HomeDetail(MainView.this, homeBooksno));
+					else
+						setDetailPanel(new HomeDetail(MainView.this));
 					break;
 				case MY:
+					if(myBooksno > 0 )
+						setDetailPanel(new MyDetail(MainView.this, myBooksno));
+					else
+						setDetailPanel(new MyDetail(MainView.this));
 					break;
 				case HISTORY:
 					setDetailPanel(new HistoryDetail(MainView.this,0));
@@ -127,6 +141,8 @@ public class MainView {
 		myPanel = new JPanel();
 		tabbedPane.addTab(" MY ", null, myPanel, null);
 		tabbedPane.setEnabledAt(1, false);
+		myPanel.setLayout(new BorderLayout());
+		myPanel.add(new MyMain(this)); // HomeMain¿¡ MainView°´Ã¼ Àü´Þ
 		
 		historyPanel = new JPanel();
 		tabbedPane.addTab("HISTORY", null, historyPanel, null);
@@ -252,5 +268,21 @@ public class MainView {
 		tabbedPane.setEnabledAt(2, bLogin);
 		loginPanel.setVisible(bLogin);
 		logoutPanel.setVisible(!bLogin);
+	}
+	
+	
+	public void setHomeBooksno(int homeBooksno) {
+		this.homeBooksno = homeBooksno;
+	}
+	public int getHomeBooksno() {
+		return homeBooksno;
+	}
+
+	public int getMyBooksno() {
+		return myBooksno;
+	}
+
+	public void setMyBooksno(int myBooksno) {
+		this.myBooksno = myBooksno;
 	}
 }

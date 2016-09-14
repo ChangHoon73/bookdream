@@ -1,4 +1,4 @@
-package kr.or.bookdream.books;
+package kr.or.bookdream.my;
 
 import java.util.Vector;
 
@@ -32,7 +32,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class HomeMain extends JPanel{
+public class MyMain extends JPanel{
 	private MainView mMainView; 
 	
 	private JComboBox cb_cat1;
@@ -52,7 +52,7 @@ public class HomeMain extends JPanel{
 	
 	private Vector<Books> vbooks;
 	
-	public HomeMain(MainView mMainView){
+	public MyMain(MainView mMainView){
 		this.mMainView = mMainView;
 		initilize();
 		this.setLayout(null); // 현재 레이아웃을 Absolute Layout으로 변경
@@ -216,8 +216,8 @@ public class HomeMain extends JPanel{
 				// 북스의 pk  no를 추출
 				int booksno = (int) table.getValueAt(seletedIndex, 0);
 				// mMainView는 추가버튼호출시 사용
-				HomeDetail homeDetail = new HomeDetail(mMainView, booksno); 
-				mMainView.setHomeBooksno(booksno);
+				MyDetail homeDetail = new MyDetail(mMainView, booksno); 
+				mMainView.setMyBooksno(booksno);
 				mMainView.setDetailPanel(homeDetail);// 추가
 				System.out.println(booksno);
 				

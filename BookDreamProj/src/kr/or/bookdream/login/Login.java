@@ -138,6 +138,12 @@ public class Login extends JDialog {
 		panel.add(label_2);
 		
 		JButton button_3 = new JButton("\uD68C\uC6D0\uAC00\uC785");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login.this.dispose();
+				mMainView.startMemberForm();
+			}
+		});
 		button_3.setFont(new Font("±¼¸²", Font.PLAIN, 15));
 		button_3.setBounds(291, 543, 100, 40);
 		getContentPane().add(button_3);

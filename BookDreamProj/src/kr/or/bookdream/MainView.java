@@ -15,6 +15,7 @@ import kr.or.bookdream.books.HomeMain;
 import kr.or.bookdream.history.HistoryDetail;
 import kr.or.bookdream.history.HistoryMain;
 import kr.or.bookdream.login.Login;
+import kr.or.bookdream.members.membersAdd;
 import kr.or.bookdream.my.MyDetail;
 import kr.or.bookdream.my.MyMain;
 
@@ -49,8 +50,8 @@ public class MainView {
 	
 	
 //	private MainView window;
-	private Login dialog;
-	
+	private Login loginDialog;
+	private membersAdd memberform;
 	private static final int HOME = 0;
 	private static final int MY = 1;
 	private static final int HISTORY = 2;
@@ -211,12 +212,29 @@ public class MainView {
 	 * ·Î±×ÀÎÆû
 	 */
 	public void startloginForm(){
-		dialog = new Login(MainView.this);
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
+		loginDialog = new Login(MainView.this);
+		loginDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		loginDialog.setVisible(true);
 		MainView.this.frame.setVisible(false);
 	}
 	
+	public void disposeLoginForm(){
+		loginDialog.dispose();
+	}
+	
+	/**
+	 * È¸¿ø°¡ÀÔÆû
+	 */
+	public void startMemberForm(){
+		memberform = new membersAdd(MainView.this);
+//		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		memberform.frame.setVisible(true);
+		MainView.this.frame.setVisible(false);
+	}
+	
+	public void disposeMemberForm(){
+		memberform.frame.dispose();
+	}
 	public void setHomeMain(){
 		homePanel.removeAll();
 		homePanel.add(new HomeMain(this)); // HomeMain¿¡ MainView°´Ã¼ Àü´Þ

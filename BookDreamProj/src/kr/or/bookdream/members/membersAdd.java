@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 
 import com.mysql.fabric.xmlrpc.base.Member;
 
+import kr.or.bookdream.MainView;
 import kr.or.bookdream.dao.DongDAO;
 import kr.or.bookdream.dao.GugunDAO;
 import kr.or.bookdream.dao.MembersDAO;
@@ -29,10 +30,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class membersAdd {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField tf_email;
 	private JTextField tf_name;
 	private JTextField tf_tel;
@@ -53,27 +56,29 @@ public class membersAdd {
 	private JButton btn_cancel;
 	private JButton btn_insert;
 	
+	private MainView mMainView;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					membersAdd window = new membersAdd();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					membersAdd window = new membersAdd();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public membersAdd() {
+	public membersAdd(MainView mMainView) {
+		this.mMainView = mMainView;
 		initialize();
 	}
 
@@ -93,8 +98,22 @@ public class membersAdd {
 		vmembers = new Vector<Members>();
 		
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				//membersAdd.this.frame.dispose();
+//				mMainView.disposeMemberForm();
+//				mMainView.startloginForm();
+			}
+			@Override
+			public void windowClosing(WindowEvent e) {
+//				mMainView.disposeMemberForm();
+//				mMainView.startloginForm();
+				System.exit(0);
+			}
+		});
 		frame.setBounds(100, 100, 910, 683);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lbl_title = new JLabel("\uD68C \uC6D0 \uAC00 \uC785");
@@ -332,7 +351,9 @@ public class membersAdd {
 	private void cancelMembers() {
 
 		JOptionPane.showMessageDialog(null, "회원가입을 취소합니다");
-		frame.dispose();
+//		frame.dispose();
+		mMainView.disposeMemberForm();
+		mMainView.startloginForm();
 	}
 
 }
